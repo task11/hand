@@ -1,4 +1,4 @@
-<h1>👋 HAND - Have A Nice Day</h1>
+<h1>👋 HAND - Have A Nice Day (prototype ver.)</h1>
 
 <hr/>
 
