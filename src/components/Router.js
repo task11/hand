@@ -1,4 +1,3 @@
-import React from "react";
 import {
   HashRouter as Router,
   Routes,
@@ -7,12 +6,14 @@ import {
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigator from "components/Navigator"
+import Auth from "routes/Auth";
 
-const AppRouter = () => {
+const AppRouter = ({ isLoggedIn }) => {
+  console.log(isLoggedIn, "라우터");
   return (
     <Router>
-      <Navigator />
-      <Routes>
+      {isLoggedIn && <Navigator />}
+      <Routes>{isLoggedIn ?
         <>
           <Route
             path="/"
@@ -23,9 +24,15 @@ const AppRouter = () => {
             element={<Profile />}
           />
         </>
+        :
+        <Route
+          path="/"
+          element={<Auth />}
+        />
+      }
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default AppRouter;
