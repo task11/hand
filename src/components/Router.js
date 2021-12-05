@@ -9,7 +9,6 @@ import Navigator from "components/Navigator"
 import Auth from "routes/Auth";
 
 const AppRouter = ({ isLoggedIn }) => {
-  console.log(isLoggedIn, "라우터");
   return (
     <Router>
       {isLoggedIn && <Navigator />}
