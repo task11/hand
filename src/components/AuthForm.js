@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import authService from "fBase";
+
 
 const AuthForm = () => {
   const [password, setPassword] = useState("");
@@ -15,7 +17,7 @@ const AuthForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
+    console.log(authService.currentUser);
 
 
   }
