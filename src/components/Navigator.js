@@ -9,7 +9,7 @@ const Navigator = () => {
           <Link to="/">홈</Link>
         </li>
         <li>
-          <Link to="/profile">PROFILE</Link>
+          <Link to="/profile">프로필</Link>
         </li>
       </ul>
 

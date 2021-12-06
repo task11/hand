@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { authService } from "fBase";
 
 
@@ -9,6 +9,8 @@ const OAuthForm = () => {
     let provider
     if (name === 'google') {
       provider = new GoogleAuthProvider();
+    } else if (name === 'facebook') {
+      provider = new FacebookAuthProvider();
     }
     await signInWithPopup(authService, provider);
   }
@@ -17,6 +19,9 @@ const OAuthForm = () => {
     <div>
       <button onClick={onSocialClick} name="google">
         GOOGLE
+      </button>
+      <button onClick={onSocialClick} name="facebook">
+        FACEBOOK
       </button>
     </div>
   );
