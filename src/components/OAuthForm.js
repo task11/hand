@@ -7,7 +7,7 @@ const OAuthForm = () => {
 
   return (
     <div>
-
+      <span>OAuth</span>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@fir
 const AuthForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [newAccount, setNewAccount] = useState(false);
   const [error, setError] = useState("");
   const toggleAccount = (prev) => setNewAccount((prev) => !prev);
@@ -16,6 +17,8 @@ const AuthForm = () => {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
+    } else if (name === "text") {
+      setUsername(value);
     }
   }
 
@@ -28,6 +31,7 @@ const AuthForm = () => {
         password
       ).then((userCredential) => {
         const user = userCredential.user;
+        username = userCredential.user.displayName;
       }).catch((error) => {
         setError(error.message);
       })
@@ -49,20 +53,31 @@ const AuthForm = () => {
 
   return (
     <div>
+      <button onClick={toggleAccount}>
+        {newAccount ? "Sign In" : "Create Account"}
+      </button>
       <form onSubmit={onSubmit}>
+        {newAccount &&
+          <input
+            name="text"
+            type="text"
+            value={username}
+            onChange={onChange}
+            placeholder="이름(2자 이상)"
+          />}
         <input
           name="email"
           type="email"
           onChange={onChange}
           value={email}
-          placeholder="input id"
+          placeholder="이메일(example@gmail.com)"
         />
         <input
           name="password"
           type="password"
           onChange={onChange}
           value={password}
-          placeholder="input password"
+          placeholder="영문, 숫자, 특문 중 2개 조합 10자 이상"
         />
         <input
           type="submit"
@@ -70,9 +85,6 @@ const AuthForm = () => {
         />
         {error && <span>{error}</span>}
       </form>
-      <button onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-      </button>
     </div>
   );
 };
