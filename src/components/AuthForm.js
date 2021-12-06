@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import authService from "fBase";
+import { authService } from "fBase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
 
 
 const AuthForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [newAccount, setNewAccount] = useState(false);
+  const [error, setError] = useState("");
+  const toggleAccount = (prev) => setNewAccount((prev) => !prev);
 
   const onChange = (event) => {
     const { target: { name, value } } = event;
@@ -17,14 +21,35 @@ const AuthForm = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(authService.currentUser);
-
+    if (newAccount) {
+      createUserWithEmailAndPassword(
+        authService,
+        email,
+        password
+      ).then((userCredential) => {
+        const user = userCredential.user;
+      }).catch((error) => {
+        setError(error.message);
+      })
+    } else {
+      signInWithEmailAndPassword(
+        authService,
+        email,
+        password
+      ).then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      }).catch((error) => {
+        setError(error.message);
+      });
+    }
 
   }
 
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <input
           name="email"
           type="email"
@@ -41,10 +66,13 @@ const AuthForm = () => {
         />
         <input
           type="submit"
-          value="Log In"
-          onSubmit={onSubmit}
+          value={newAccount ? "Create Account" : "Log In"}
         />
+        {error && <span>{error}</span>}
       </form>
+      <button onClick={toggleAccount}>
+        {newAccount ? "Sign In" : "Create Account"}
+      </button>
     </div>
   );
 };
