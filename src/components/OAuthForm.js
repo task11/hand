@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { authService } from "fBase";
 
 
 const OAuthForm = () => {
-  const provider = new GoogleAuthProvider();
+  const onSocialClick = async (event) => {
+    const { target: { name } } = event;
+    let provider
+    if (name === 'google') {
+      provider = new GoogleAuthProvider();
+    }
+    await signInWithPopup(authService, provider);
+  }
 
   return (
     <div>
-      <span>OAuth</span>
+      <button onClick={onSocialClick} name="google">
+        GOOGLE
+      </button>
     </div>
   );
 };
