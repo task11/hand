@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { authService } from "fBase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "@firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile
+} from "@firebase/auth";
 
 
 const AuthForm = () => {

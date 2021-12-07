@@ -4,7 +4,7 @@ import React from "react";
 const Home = ({ userObj }) => {
   console.log(userObj);
   return (
-    <ToDoList />
+    <ToDoList userObj={userObj} />
   );
 };
 
