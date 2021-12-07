@@ -46,11 +46,7 @@ const AuthForm = () => {
         authService,
         email,
         password
-      ).then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      }).catch((error) => {
+      ).catch((error) => {
         setError(error.message);
       });
     }
