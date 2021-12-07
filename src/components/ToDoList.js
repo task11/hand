@@ -22,6 +22,7 @@ const ToDoList = ({ userObj }) => {
     try {
       const docRef = await addDoc(collection(dbService, "todos"), {
         task: toDo,
+        done: false,
         creatorId: userObj.uid,
         createdAt: Date.now(),
       });
