@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { dbService } from "fBase";
-import { addDoc, collection } from "@firebase/firestore";
+import { addDoc, collection, onSnapshot, orderBy, query, where } from "@firebase/firestore";
 
 
 const ToDoList = ({ userObj }) => {
 
   const [toDo, setToDo] = useState("");
   const [error, setError] = useState("");
+  const [toDos, setToDos] = useState([]);
 
   const onChange = (event) => {
     const {
@@ -29,7 +30,23 @@ const ToDoList = ({ userObj }) => {
     } catch (e) {
       setError(e);
     }
+    setToDo("");
   }
+
+  useEffect(() => {
+    const q = query(collection(dbService, "todos"), orderBy("createdAt")); //, where("creatorId", "==", userObj.uid)
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const toDoArray = querySnapshot.docs.map(doc => {
+        return {
+          id: doc.id,
+          ...doc.data()
+        }
+      });
+      setToDos(toDoArray);
+    });
+  }, [])
+
   return (
     <div>
       <div>To-Do-List</div>
@@ -48,7 +65,9 @@ const ToDoList = ({ userObj }) => {
       </div>
       <div>
         <ul>
-          <li>밥 먹기</li>
+          {toDos.map((toDo) => {
+            return <li key={toDo.id}>{toDo.task}</li>;
+          })}
         </ul>
       </div>
 
