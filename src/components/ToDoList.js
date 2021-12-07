@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { dbService } from "fBase";
 
 const ToDoList = (userObj) => {
   const [toDo, setToDo] = useState("");
@@ -12,7 +13,6 @@ const ToDoList = (userObj) => {
     setToDo(value);
   }
 
-  console.log(toDo);
   const onSubmit = (event) => {
     event.preventDefault();
 
