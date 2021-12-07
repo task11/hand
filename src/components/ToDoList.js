@@ -7,6 +7,7 @@ const ToDoList = ({ userObj }) => {
 
   const [toDo, setToDo] = useState("");
   const [error, setError] = useState("");
+  const [checked, setChecked] = useState(false);
   const [toDos, setToDos] = useState([]);
 
   const onChange = (event) => {
@@ -32,6 +33,12 @@ const ToDoList = ({ userObj }) => {
     }
     setToDo("");
   }
+
+  const onCheck = (prev) => {
+    setChecked((prev) => !prev)
+    console.log("클릭");
+    // 데이터베이스 업데이트 코드 추가
+  };
 
   useEffect(() => {
     const q = query(collection(dbService, "todos"), orderBy("createdAt")); //, where("creatorId", "==", userObj.uid)
@@ -66,7 +73,12 @@ const ToDoList = ({ userObj }) => {
       <div>
         <ul>
           {toDos.map((toDo) => {
-            return <li key={toDo.id}>{toDo.task}</li>;
+            return (
+              <div key={toDo.id}>
+                <input type="checkbox" value={checked} onChange={onCheck} />
+                <li>{toDo.task}</li>
+              </div>
+            );
           })}
         </ul>
       </div>
