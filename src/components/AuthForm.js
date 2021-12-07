@@ -17,9 +17,9 @@ const AuthForm = () => {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
-    } else if (name === "text") {
-      setUsername(value);
-    }
+    }// else if (name === "text") {
+    //   setUsername(value);
+    // }
   }
 
   const onSubmit = (event) => {
@@ -31,7 +31,7 @@ const AuthForm = () => {
         password
       ).then((userCredential) => {
         const user = userCredential.user;
-        username = userCredential.user.displayName;
+        //  username = userCredential.user.displayName;
       }).catch((error) => {
         setError(error.message);
       })
@@ -57,14 +57,14 @@ const AuthForm = () => {
         {newAccount ? "Sign In" : "Create Account"}
       </button>
       <form onSubmit={onSubmit}>
-        {newAccount &&
+        {/* {newAccount &&
           <input
             name="text"
             type="text"
             value={username}
             onChange={onChange}
             placeholder="이름(2자 이상)"
-          />}
+          />} */}
         <input
           name="email"
           type="email"
