@@ -11,6 +11,9 @@ const Navigator = () => {
         <li>
           <Link to="/profile">프로필</Link>
         </li>
+        <li>
+          <Link to="/setting">설정</Link>
+        </li>
       </ul>
 
     </nav>

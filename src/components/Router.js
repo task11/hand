@@ -7,8 +7,9 @@ import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Navigator from "components/Navigator"
 import Auth from "routes/Auth";
+import Setting from "routes/Setting";
 
-const AppRouter = ({ isLoggedIn }) => {
+const AppRouter = ({ userObj, isLoggedIn }) => {
   return (
     <Router>
       {isLoggedIn && <Navigator />}
@@ -16,11 +17,15 @@ const AppRouter = ({ isLoggedIn }) => {
         <>
           <Route
             path="/"
-            element={<Home />}
+            element={<Home userObj={userObj} />}
           />
           <Route
             path="/profile"
-            element={<Profile />}
+            element={<Profile userObj={userObj} />}
+          />
+          <Route
+            path="/setting"
+            element={<Setting userObj={userObj} />}
           />
         </>
         :

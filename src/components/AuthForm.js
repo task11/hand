@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { authService } from "fBase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "@firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "@firebase/auth";
 
 
 const AuthForm = () => {
@@ -17,9 +17,9 @@ const AuthForm = () => {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
-    }// else if (name === "text") {
-    //   setUsername(value);
-    // }
+    } else if (name === "text") {
+      setUsername(value);
+    }
   }
 
   const onSubmit = (event) => {
@@ -31,7 +31,9 @@ const AuthForm = () => {
         password
       ).then((userCredential) => {
         const user = userCredential.user;
-        //  username = userCredential.user.displayName;
+        updateProfile(user, {
+          displayName: username,
+        });
       }).catch((error) => {
         setError(error.message);
       })
@@ -57,14 +59,14 @@ const AuthForm = () => {
         {newAccount ? "Sign In" : "Create Account"}
       </button>
       <form onSubmit={onSubmit}>
-        {/* {newAccount &&
+        {newAccount &&
           <input
             name="text"
             type="text"
             value={username}
             onChange={onChange}
             placeholder="이름(2자 이상)"
-          />} */}
+          />}
         <input
           name="email"
           type="email"

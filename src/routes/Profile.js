@@ -1,5 +1,5 @@
 import React from "react";
 
-const Profile = () => <span>Profilesdasdasdasd</span>;
+const Profile = ({ userObj }) => <span>Profilesdasdasdasd</span>;
 
 export default Profile;
