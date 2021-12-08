@@ -50,7 +50,7 @@ const ToDoList = ({ userObj }) => {
 
   const onEditClick = (prev) => {
     setEditToggle((prev) => !prev);
-    setClickedId(prev.target.name);
+
   };
 
   const onDeleteToDo = (event) => {
@@ -121,7 +121,7 @@ const ToDoList = ({ userObj }) => {
                 <li>{toDo.task}</li>
                 <button value="edit" name={toDo.id} onClick={onEditClick}>...</button>
                 {
-                  setClickedId === toDo.id &&
+                  editToggle &&
                   (
                     <div>
                       <button>수정</button>
