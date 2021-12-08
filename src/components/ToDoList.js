@@ -11,6 +11,8 @@ const ToDoList = ({ userObj }) => {
   const [error, setError] = useState("");
   const [isChecked, setIsChecked] = useState(true); // check box value 초기 값이 true여야지 첫 번쨰 클릭때 onCheck 함수에서 true로 바뀜
   const [toDos, setToDos] = useState([]);
+  const [editToggle, setEditToggle] = useState(false);
+  const [clickedId, setClickedId] = useState("");
 
   const onChange = (event) => {
     const {
@@ -44,6 +46,25 @@ const ToDoList = ({ userObj }) => {
     updateDoc(washingtonRef, {
       done: isChecked
     });
+  };
+
+  const onEditClick = (prev) => {
+    setEditToggle((prev) => !prev);
+    setClickedId(prev.target.name);
+  };
+
+  const onDeleteToDo = (event) => {
+    const { target: { name } } = event;
+
+    console.log(name);
+
+  };
+
+  const onEditToDo = (event) => {
+    const { target: { name } } = event;
+
+    console.log(name);
+
   };
 
   useEffect(() => {
@@ -98,6 +119,16 @@ const ToDoList = ({ userObj }) => {
                   name={toDo.id}
                 />
                 <li>{toDo.task}</li>
+                <button value="edit" name={toDo.id} onClick={onEditClick}>...</button>
+                {
+                  setClickedId === toDo.id &&
+                  (
+                    <div>
+                      <button>수정</button>
+                      <button>삭제</button>
+                    </div>
+                  )
+                }
               </div>
             );
           })}
