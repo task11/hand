@@ -24,8 +24,10 @@ function App() {
 
   return (
     <div>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "로딩중..."}
-      < footer >& copy; {new Date().getFullYear()} have a nice day</footer>
+      {init ? <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} /> : "로딩중..."}
+      <div>
+        <footer>& copy; {new Date().getFullYear()} have a nice day</footer>
+      </div>
     </div >
   );
 }
