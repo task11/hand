@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { authService, dbService } from "fBase";
+
 import { addDoc, collection, doc, onSnapshot, orderBy, query, updateDoc, where } from "@firebase/firestore";
+import { onAuthStateChanged } from "@firebase/auth";
 
 
 const ToDoList = ({ userObj }) => {
@@ -56,6 +58,12 @@ const ToDoList = ({ userObj }) => {
         }
       });
       setToDos(toDoArray);
+    });
+
+    onAuthStateChanged(authService, (user) => {
+      if (user == null) {
+        unsubscribe();
+      }
     });
 
   }, [])

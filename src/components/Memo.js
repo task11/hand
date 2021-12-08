@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { authService, dbService } from "fBase";
+import { onAuthStateChanged } from "@firebase/auth";
 import { addDoc, collection, doc, onSnapshot, orderBy, query, updateDoc, where } from "@firebase/firestore";
 
 // 수정 기능 추가
@@ -44,6 +45,12 @@ const Memo = ({ userObj }) => {
         }
       });
       setMemos(memoArray);
+    });
+
+    onAuthStateChanged(authService, (user) => {
+      if (user == null) {
+        unsubscribe();
+      }
     });
 
   }, [])
