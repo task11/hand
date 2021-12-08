@@ -1,9 +1,14 @@
+import LogOut from "components/LogOut";
+import Preference from "components/Preference";
 import React from "react";
 
 const Setting = () => {
   return (
     <div>
-      <span>Setting</span>
+      <div>
+        <LogOut />
+        <Preference />
+      </div>
     </div>
   )
 }
