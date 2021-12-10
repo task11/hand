@@ -19,14 +19,8 @@ const ToDoList = ({ userObj }) => {
 
   const [toDo, setToDo] = useState("");
   const [error, setError] = useState("");
-  const [isChecked, setIsChecked] = useState(true); // check box value 초기 값이 true여야지 첫 번쨰 클릭때 onCheck 함수에서 true로 바뀜
   const [toDos, setToDos] = useState([]);
-  const [editToggle, setEditToggle] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-  const [selectedToDo, setSelectedToDo] = useState("");
-  const [newTask, setNewTask] = useState("");
 
-  const toDoRef = doc(dbService, "todos", `${toDo.id}`);
 
   const onChange = (event) => {
     const {
@@ -35,16 +29,6 @@ const ToDoList = ({ userObj }) => {
       }
     } = event;
     setToDo(value);
-  }
-
-  const onEditChange = (event) => {
-    const {
-      target: {
-        value,
-      }
-    } = event;
-    setNewTask(value);
-    console.log(newTask);
   }
 
   const onSubmit = async (event) => {
@@ -62,40 +46,10 @@ const ToDoList = ({ userObj }) => {
     setToDo("");
   }
 
-  const onCheck = (prev) => {
-    setIsChecked((prev) => !prev);
-    // 데이터베이스 업데이트 코드 추가
-    updateDoc(toDoRef, {
-      done: isChecked
-    });
-  };
 
-  const onEditClick = (prev) => {
-    setEditToggle((prev) => !prev);
-    setSelectedToDo(prev.target.name);
-  };
-
-  const onDeleteToDo = async () => {
-    setEditToggle(false);
-    await deleteDoc(toDoRef);
-  };
-
-  const onEditToDo = async (event) => {
-    setIsEdit((event) => !event);
-    setEditToggle(false);
-  };
-
-  const onEditSubmit = async (event) => {
-    event.preventDefault();
-    setIsEdit(false);
-    await updateDoc(toDoRef, {
-      task: newTask
-    });
-  }
 
   useEffect(() => {
     const q = query(collection(dbService, "todos"), orderBy("createdAt")); //userObj.uid가 왜 안될까 ?
-
     // unsubscribe(); 유저 로그 아웃 시에 onSnapshot 수신 대기 상태 제거해줘야함
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const toDoArray = querySnapshot.docs.map(doc => {
@@ -112,7 +66,6 @@ const ToDoList = ({ userObj }) => {
         unsubscribe();
       }
     });
-
   }, [])
 
   return (
