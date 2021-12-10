@@ -9,10 +9,10 @@ import {
   orderBy,
   query,
   updateDoc,
-  where,
   deleteDoc
 } from "@firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
+import ToDoEdit from "./ToDo";
 
 
 const ToDoList = ({ userObj }) => {
@@ -94,7 +94,7 @@ const ToDoList = ({ userObj }) => {
   }
 
   useEffect(() => {
-    const q = query(collection(dbService, "todos"), orderBy("createdAt"), where("creatorId", "==", authService.currentUser.uid)); //userObj.uid가 왜 안될까 ?
+    const q = query(collection(dbService, "todos"), orderBy("createdAt")); //userObj.uid가 왜 안될까 ?
 
     // unsubscribe(); 유저 로그 아웃 시에 onSnapshot 수신 대기 상태 제거해줘야함
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -115,9 +115,6 @@ const ToDoList = ({ userObj }) => {
 
   }, [])
 
-
-  console.log();
-
   return (
     <div>
       <div>To-Do-List</div>
@@ -136,53 +133,17 @@ const ToDoList = ({ userObj }) => {
       </div>
       <div>
         <ul>
-          {
-            isEdit && (
-              <form onSubmit={onEditSubmit}>
-                <input
-                  type="text"
-                  value={newTask}
-                  onChange={onEditChange}
-                />
-                <button type="submit">수정</button>
-              </form>
-            )
-          }
           {toDos.map((toDo) => {
             return (
-              <div key={toDo.id}>
-                <input type="checkbox"
-                  value={isChecked}
-                  onChange={onCheck}
-                  checked={toDo.done}
-                  name={toDo.id}
-                />
-                <li>{toDo.task}</li>
-                <button
-                  value="edit"
-                  name={toDo.id}
-                  onClick={onEditClick}>...</button>
-                {
-                  editToggle && (toDo.id === selectedToDo) &&
-                  (
-                    <div>
-                      <button
-                        onClick={onEditToDo}
-                        name={toDo.id}
-                      >수정</button>
-                      <button
-                        onClick={onDeleteToDo}
-                        name={toDo.id}
-                      >삭제</button>
-                    </div>
-                  )
-                }
-              </div>
+              <ToDoEdit
+                key={toDo.id}
+                toDoObj={toDo}
+                isOwner={toDo.creatorId === userObj.uid}
+              />
             );
           })}
         </ul>
       </div>
-
     </div>
   );
 }
