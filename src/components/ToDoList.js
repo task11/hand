@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { authService, dbService } from "fBase";
 
-import { addDoc, collection, doc, onSnapshot, orderBy, query, updateDoc, where } from "@firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  updateDoc,
+  where,
+  deleteDoc
+} from "@firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
 
 
@@ -12,7 +22,10 @@ const ToDoList = ({ userObj }) => {
   const [isChecked, setIsChecked] = useState(true); // check box value 초기 값이 true여야지 첫 번쨰 클릭때 onCheck 함수에서 true로 바뀜
   const [toDos, setToDos] = useState([]);
   const [editToggle, setEditToggle] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [selectedToDo, setSelectedToDo] = useState("");
+  const [newTask, setNewTask] = useState("");
+
 
   const onChange = (event) => {
     const {
@@ -21,6 +34,15 @@ const ToDoList = ({ userObj }) => {
       }
     } = event;
     setToDo(value);
+  }
+
+  const onEditChange = (event) => {
+    const {
+      target: {
+        value,
+      }
+    } = event;
+    setNewTask(value);
   }
 
   const onSubmit = async (event) => {
@@ -41,9 +63,8 @@ const ToDoList = ({ userObj }) => {
   const onCheck = (prev) => {
     setIsChecked((prev) => !prev);
     // 데이터베이스 업데이트 코드 추가
-    const washingtonRef = doc(dbService, "todos", prev.target.name);
-
-    updateDoc(washingtonRef, {
+    const ref = doc(dbService, "todos", prev.target.name);
+    updateDoc(ref, {
       done: isChecked
     });
   };
@@ -53,19 +74,26 @@ const ToDoList = ({ userObj }) => {
     setSelectedToDo(prev.target.name);
   };
 
-  const onDeleteToDo = (event) => {
+  const onDeleteToDo = async (event) => {
     const { target: { name } } = event;
-
-    console.log(name);
-
+    setEditToggle(false);
+    await deleteDoc(doc(dbService, "todos", name));
   };
 
-  const onEditToDo = (event) => {
-    const { target: { name } } = event;
-
-    console.log(name);
-
+  const onEditToDo = async (event) => {
+    setIsEdit((event) => !event);
+    setEditToggle(false);
   };
+
+  const onEditSubmit = async (event) => {
+    setIsEdit(false);
+    const { target: { name } } = event;
+    console.log(name);
+    // const ref = doc(dbService, "todos", name);
+    // await updateDoc(ref, {
+    //   task: newTask
+    // });
+  }
 
   useEffect(() => {
     const q = query(collection(dbService, "todos"), orderBy("createdAt"), where("creatorId", "==", authService.currentUser.uid)); //userObj.uid가 왜 안될까 ?
@@ -119,14 +147,36 @@ const ToDoList = ({ userObj }) => {
                   name={toDo.id}
                 />
                 <li>{toDo.task}</li>
-                <button value="edit" name={toDo.id} onClick={onEditClick}>...</button>
+                <button
+                  value="edit"
+                  name={toDo.id}
+                  onClick={onEditClick}>...</button>
                 {
                   editToggle && (toDo.id === selectedToDo) &&
                   (
                     <div>
-                      <button>수정</button>
-                      <button>삭제</button>
+                      <button
+                        onClick={onEditToDo}
+                        name={toDo.id}
+                      >수정</button>
+                      <button
+                        onClick={onDeleteToDo}
+                        name={toDo.id}
+                      >삭제</button>
                     </div>
+                  )
+                }
+                {
+                  isEdit && (toDo.id === selectedToDo) && (
+                    <form onSubmit={onEditSubmit}>
+                      <input
+                        type="text"
+                        value={newTask}
+                        onChange={onEditChange}
+                        name={toDo.id}
+                      />
+                      <button type="submit">수정</button>
+                    </form>
                   )
                 }
               </div>
