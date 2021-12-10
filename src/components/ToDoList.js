@@ -26,6 +26,7 @@ const ToDoList = ({ userObj }) => {
   const [selectedToDo, setSelectedToDo] = useState("");
   const [newTask, setNewTask] = useState("");
 
+  const toDoRef = doc(dbService, "todos", `${toDo.id}`);
 
   const onChange = (event) => {
     const {
@@ -43,6 +44,7 @@ const ToDoList = ({ userObj }) => {
       }
     } = event;
     setNewTask(value);
+    console.log(newTask);
   }
 
   const onSubmit = async (event) => {
@@ -63,8 +65,7 @@ const ToDoList = ({ userObj }) => {
   const onCheck = (prev) => {
     setIsChecked((prev) => !prev);
     // 데이터베이스 업데이트 코드 추가
-    const ref = doc(dbService, "todos", prev.target.name);
-    updateDoc(ref, {
+    updateDoc(toDoRef, {
       done: isChecked
     });
   };
@@ -74,10 +75,9 @@ const ToDoList = ({ userObj }) => {
     setSelectedToDo(prev.target.name);
   };
 
-  const onDeleteToDo = async (event) => {
-    const { target: { name } } = event;
+  const onDeleteToDo = async () => {
     setEditToggle(false);
-    await deleteDoc(doc(dbService, "todos", name));
+    await deleteDoc(toDoRef);
   };
 
   const onEditToDo = async (event) => {
@@ -86,13 +86,11 @@ const ToDoList = ({ userObj }) => {
   };
 
   const onEditSubmit = async (event) => {
+    event.preventDefault();
     setIsEdit(false);
-    const { target: { name } } = event;
-    console.log(name);
-    // const ref = doc(dbService, "todos", name);
-    // await updateDoc(ref, {
-    //   task: newTask
-    // });
+    await updateDoc(toDoRef, {
+      task: newTask
+    });
   }
 
   useEffect(() => {
@@ -118,6 +116,7 @@ const ToDoList = ({ userObj }) => {
   }, [])
 
 
+  console.log();
 
   return (
     <div>
@@ -137,6 +136,18 @@ const ToDoList = ({ userObj }) => {
       </div>
       <div>
         <ul>
+          {
+            isEdit && (
+              <form onSubmit={onEditSubmit}>
+                <input
+                  type="text"
+                  value={newTask}
+                  onChange={onEditChange}
+                />
+                <button type="submit">수정</button>
+              </form>
+            )
+          }
           {toDos.map((toDo) => {
             return (
               <div key={toDo.id}>
@@ -164,19 +175,6 @@ const ToDoList = ({ userObj }) => {
                         name={toDo.id}
                       >삭제</button>
                     </div>
-                  )
-                }
-                {
-                  isEdit && (toDo.id === selectedToDo) && (
-                    <form onSubmit={onEditSubmit}>
-                      <input
-                        type="text"
-                        value={newTask}
-                        onChange={onEditChange}
-                        name={toDo.id}
-                      />
-                      <button type="submit">수정</button>
-                    </form>
                   )
                 }
               </div>
