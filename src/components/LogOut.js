@@ -1,17 +1,23 @@
 import { authService } from "fBase";
+import { signOut } from "firebase/auth";
 import React from "react";
 import { useNavigate } from "react-router";
 
-const LogOut = () => {
+const LogOut = ({ userObj }) => {
   const navigate = useNavigate();
 
   const onLogOutClick = () => {
-    authService.signOut();
-    navigate('/');
+    signOut(userObj).then(() => {
+      console.log("로그아웃 완료");
+      navigate('/');
+    }).catch((error) => {
+      console.log(error);
+    })
+
   };
 
   return (
-    <span onClick={onLogOutClick}>로그아웃</span>
+    <button onClick={onLogOutClick}>로그아웃</button>
   );
 }
 

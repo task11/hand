@@ -2,11 +2,11 @@ import LogOut from "components/LogOut";
 import Preference from "components/Preference";
 import React from "react";
 
-const Setting = () => {
+const Setting = ({ userObj }) => {
   return (
     <div>
       <div>
-        <LogOut />
+        <LogOut userObj={userObj} />
         <Preference />
       </div>
     </div>

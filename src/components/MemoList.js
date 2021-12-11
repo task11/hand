@@ -42,7 +42,7 @@ const MemoList = ({ userObj }) => {
   }
 
   useEffect(() => {
-    const q = query(collection(dbService, "memos"), orderBy("createdAt", "desc"), where("creatorId", "==", authService.currentUser.uid)); //userObj.uid가 왜 안될까 ?
+    const q = query(collection(dbService, "memos"), orderBy("createdAt", "desc")); //userObj.uid가 왜 안될까 ?
 
     // unsubscribe(); 유저 로그 아웃 시에 onSnapshot 수신 대기 상태 제거해줘야함
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

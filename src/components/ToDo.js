@@ -64,17 +64,19 @@ const ToDo = ({ toDoObj }) => {
           checked={toDoObj.done}
         />
         {isEdit ?
-          (<li>
+          (
             <form onSubmit={onEditSubmit}>
-              <input
-                value={newTask}
-                onChange={onEditChange}
-              />
+              <span>
+                <input
+                  value={newTask}
+                  onChange={onEditChange}
+                />
+              </span>
               <button name="edit" type="submit">수정!</button>
               <button name="cancle" type="button" onClick={onCancle} >취소</button>
             </form>
-          </li>) :
-          <li>{toDoObj.task}</li>
+          ) :
+          <span>{toDoObj.task}</span>
         }
         <input
           value="..."
