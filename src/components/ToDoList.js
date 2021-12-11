@@ -4,13 +4,10 @@ import { authService, dbService } from "fBase";
 import {
   addDoc,
   collection,
-  doc,
   onSnapshot,
   orderBy,
   query,
-  updateDoc,
   where,
-  deleteDoc
 } from "@firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
 import ToDoEdit from "./ToDo";
@@ -35,7 +32,7 @@ const ToDoList = ({ userObj }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const docRef = await addDoc(collection(dbService, "todos"), {
+      await addDoc(collection(dbService, "todos"), {
         task: toDo,
         done: false,
         creatorId: userObj.uid,

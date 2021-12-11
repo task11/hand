@@ -76,10 +76,10 @@ const ToDo = ({ toDoObj }) => {
           </li>) :
           <li>{toDoObj.task}</li>
         }
-
-        <button
-          value="edit"
-          onClick={onEditClick}>...</button>
+        <input
+          value="..."
+          type="button"
+          onClick={onEditClick} />
         {
           editToggle &&
           (

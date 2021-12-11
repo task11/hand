@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { authService, dbService } from "fBase";
 import { onAuthStateChanged } from "@firebase/auth";
-import { addDoc, collection, doc, onSnapshot, orderBy, query, updateDoc, where } from "@firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where
+} from "@firebase/firestore";
+import Memo from "./Memo";
 
 // 수정 기능 추가
 const MemoList = ({ userObj }) => {
@@ -22,7 +30,7 @@ const MemoList = ({ userObj }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const docRef = await addDoc(collection(dbService, "memos"), {
+      await addDoc(collection(dbService, "memos"), {
         text: memo,
         creatorId: userObj.uid,
         createdAt: Date.now(),
@@ -34,7 +42,7 @@ const MemoList = ({ userObj }) => {
   }
 
   useEffect(() => {
-    const q = query(collection(dbService, "memos"), orderBy("createdAt"), where("creatorId", "==", authService.currentUser.uid)); //userObj.uid가 왜 안될까 ?
+    const q = query(collection(dbService, "memos"), orderBy("createdAt", "desc"), where("creatorId", "==", authService.currentUser.uid)); //userObj.uid가 왜 안될까 ?
 
     // unsubscribe(); 유저 로그 아웃 시에 onSnapshot 수신 대기 상태 제거해줘야함
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -77,9 +85,10 @@ const MemoList = ({ userObj }) => {
         <ul>
           {memos.map((memo) => {
             return (
-              <div key={memo.id}>
-                <span>{memo.text}</span>
-              </div>
+              <Memo
+                key={memo.id}
+                memoObj={memo}
+              />
             );
           })}
         </ul>
