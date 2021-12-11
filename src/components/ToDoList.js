@@ -9,6 +9,7 @@ import {
   orderBy,
   query,
   updateDoc,
+  where,
   deleteDoc
 } from "@firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
@@ -49,7 +50,7 @@ const ToDoList = ({ userObj }) => {
 
 
   useEffect(() => {
-    const q = query(collection(dbService, "todos"), orderBy("createdAt")); //userObj.uid가 왜 안될까 ?
+    const q = query(collection(dbService, "todos"), orderBy("createdAt"), where("creatorId", "==", userObj.uid)); //userObj.uid가 왜 안될까 ?
     // unsubscribe(); 유저 로그 아웃 시에 onSnapshot 수신 대기 상태 제거해줘야함
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const toDoArray = querySnapshot.docs.map(doc => {
@@ -91,7 +92,6 @@ const ToDoList = ({ userObj }) => {
               <ToDoEdit
                 key={toDo.id}
                 toDoObj={toDo}
-                isOwner={toDo.creatorId === userObj.uid}
               />
             );
           })}
