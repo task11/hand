@@ -1,4 +1,4 @@
-import Memo from "components/Memo";
+import MemoList from "components/MemoList";
 import ToDoList from "components/ToDoList";
 import React from "react";
 
@@ -7,7 +7,7 @@ const Home = ({ userObj }) => {
   return (
     <>
       <ToDoList userObj={userObj} />
-      <Memo userObj={userObj} />
+      <MemoList userObj={userObj} />
     </>
   );
 };

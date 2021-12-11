@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 import { addDoc, collection, doc, onSnapshot, orderBy, query, updateDoc, where } from "@firebase/firestore";
 
 // 수정 기능 추가
-const Memo = ({ userObj }) => {
+const MemoList = ({ userObj }) => {
 
   const [memo, setMemo] = useState("");
   const [error, setError] = useState("");
@@ -89,4 +89,4 @@ const Memo = ({ userObj }) => {
   );
 }
 
-export default Memo;
+export default MemoList;
