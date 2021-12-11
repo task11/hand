@@ -6,11 +6,15 @@ import React from "react";
 const Home = ({ userObj }) => {
   console.log(userObj);
   return (
-    <>
-      <Calendar userObj={userObj} />
-      <ToDoList userObj={userObj} />
-      <MemoList userObj={userObj} />
-    </>
+    <div style={{ display: "flex" }}>
+      <div style={{ height: "600px", width: "900px" }}>
+        <Calendar userObj={userObj} />
+      </div>
+      <div>
+        <ToDoList userObj={userObj} />
+        <MemoList userObj={userObj} />
+      </div>
+    </div>
   );
 };
 

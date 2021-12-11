@@ -26,7 +26,13 @@ function App() {
     <div>
       {init ? <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} /> : "로딩중..."}
       <div>
-        <footer>& copy; {new Date().getFullYear()} have a nice day</footer>
+        <footer style={{
+          width: "100%",
+          height: "50px", /* footer의 높이 */
+          position: "absolute",
+          bottom: "0",
+          left: "0"
+        }}>& copy; {new Date().getFullYear()} have a nice day</footer>
       </div>
     </div >
   );
