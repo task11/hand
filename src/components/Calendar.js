@@ -8,9 +8,14 @@ import Modal from "react-modal";
 const Calendar = ({ userObj }) => {
   const [eventColor, SetEventColor] = useState("red");
   const [isOpen, setIsOpen] = useState(false);
+  const [test, setTest] = useState("");
 
-  const toggleModal = () => {
-    setIsOpen((prev) => !prev); s
+  Modal.setAppElement("#root");
+
+  const toggleModal = (arg) => {
+    setIsOpen((prev) => !prev);
+    setTest(arg.dateStr);
+    console.log(test);
   }
 
   console.log(userObj);
@@ -57,12 +62,13 @@ const Calendar = ({ userObj }) => {
   return (
     <>
       <FullCalendar
+        id="calendar"
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         headerToolbar={{
           center: 'dayGridMonth,timeGridWeek,timeGridDay new',
         }}
-        dateClick={handleDateClick} // 클릭 이벤트
+        dateClick={toggleModal} // 클릭 이벤트
         customButtons={{
           new: {
             text: 'new',
@@ -73,12 +79,14 @@ const Calendar = ({ userObj }) => {
         events={events}
         eventColor={eventColor}
       />
+
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
         contentLabel="My dialog"
       >
         <div>My Modal</div>
+        <span>{test}</span>
         <button onClick={toggleModal}>Close</button>
       </Modal>
     </>
