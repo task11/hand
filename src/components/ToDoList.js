@@ -63,7 +63,7 @@ const ToDoList = ({ userObj }) => {
         unsubscribe();
       }
     });
-  }, [])
+  }, [userObj.uid])
 
   return (
     <div>

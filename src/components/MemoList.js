@@ -61,7 +61,7 @@ const MemoList = ({ userObj }) => {
       }
     });
 
-  }, [])
+  }, [userObj.uid])
 
 
 
