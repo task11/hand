@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Navigator = () => {
   return (
-    <nav>
-      <ul>
+    <nav >
+      <ul style={{ display: "flex" }}>
         <li>
           <Link to="/">홈</Link>
         </li>
