@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Modal from "react-modal";
+import { addDoc, collection } from "firebase/firestore";
+import { dbService } from "fBase";
 
 const Calendar = ({ userObj }) => {
   const [eventColor, SetEventColor] = useState("red");
@@ -26,6 +28,7 @@ const Calendar = ({ userObj }) => {
     { id: 3, title: 'event 3', start: '2021-12-17', end: '2021-12-20' },
     { id: 4, title: 'event 4', start: '2021-12-18', end: '2021-12-18' },
   ]);
+  const [title, setTitle] = useState("");
   const [startDay, setStartDay] = useState("");
   const [startTime, setStartTime] = useState("");
 
@@ -57,9 +60,29 @@ const Calendar = ({ userObj }) => {
     console.log('new event')
   }
 
-  const onAddCalendar = (event) => {
+  const onAddCalendar = async (event) => {
     event.preventDefault();
-    console.log("서브밋!");
+    if (!everydayBtn) {
+      setStartDay(startDay + "T" + startTime);
+      setEndDate(endDate + "T" + endTime);
+    }
+    try {
+      await addDoc(collection(dbService, "schedules"), {
+        title: title,
+        start: startDay,
+        end: endDate,
+        creatorId: userObj.uid,
+        createdAt: Date.now(),
+      });
+    } catch (e) {
+
+    }
+    setIsOpen((prev) => !prev);
+    setTitle("");
+    setStartDay("");
+    setStartTime("");
+    setEndDate("");
+    setEndTime("");
   }
 
   const onStartTimeChange = (event) => {
@@ -78,10 +101,16 @@ const Calendar = ({ userObj }) => {
     }
   }
 
+  const onSetTitle = (event) => {
+    const { target: { value } } = event;
+
+    setTitle(value);
+
+  }
+
   const toggleBtn = (arg) => {
     setEverydayBtn((prev) => !prev);
   }
-  console.log(endDate);
 
   return (
     <>
@@ -99,10 +128,10 @@ const Calendar = ({ userObj }) => {
             },
             content: {
               position: 'fixed',
-              top: 300,
+              top: 200,
               left: 200,
               right: 600,
-              bottom: 300,
+              bottom: 200,
               border: '1px solid #ccc',
               background: 'rgba(255, 255, 255, 0.8)',
               overflow: 'auto',
@@ -123,24 +152,18 @@ const Calendar = ({ userObj }) => {
           <form onSubmit={onAddCalendar}>
             {everydayBtn ?
               <>
-                <span>시작시간</span>
-                <input type="date"
-                  value={startDay}
-                  readOnly />
-                <br />
-                <span>종료시간</span>
-                <input type="date"
-                  value={endDate}
-                  onChange={onEndDateChange}
+                <input
+                  type="text"
+                  value={title}
+                  onChange={onSetTitle}
+                  placeholder="일정명"
                 />
-              </>
-              :
-              <>
                 <span>시작시간</span>
-                <input type="date"
+                <input
+                  type="date"
                   value={startDay}
-                  readOnly />
-                <input name="startTime" type="time" value={startTime} onChange={onStartTimeChange} />
+                  readOnly
+                />
                 <br />
                 <span>종료시간</span>
                 <input
@@ -149,7 +172,39 @@ const Calendar = ({ userObj }) => {
                   value={endDate}
                   onChange={onEndDateChange}
                 />
-                <input name="endTime" type="time" value={endTime} onChange={onEndDateChange} />
+              </>
+              :
+              <>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={onSetTitle}
+                  placeholder="일정명"
+                />
+                <span>시작시간</span>
+                <input type="date"
+                  value={startDay}
+                  readOnly />
+                <input
+                  name="startTime"
+                  type="time"
+                  value={startTime}
+                  onChange={onStartTimeChange}
+                />
+                <br />
+                <span>종료시간</span>
+                <input
+                  name="endDate"
+                  type="date"
+                  value={endDate}
+                  onChange={onEndDateChange}
+                />
+                <input
+                  name="endTime"
+                  type="time"
+                  value={endTime}
+                  onChange={onEndDateChange}
+                />
               </>
 
             }
