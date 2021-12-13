@@ -1,33 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar, { formatDate } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Modal from "react-modal";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { dbService } from "fBase";
 
 const Calendar = ({ userObj }) => {
   const [eventColor, SetEventColor] = useState("red");
   const [isOpen, setIsOpen] = useState(false);
-  const [event, setEvent] = useState({});
+  //const [event, setEvent] = useState({});
   const [everydayBtn, setEverydayBtn] = useState(false);
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      title: '이벤투1',
-      start: '2021-12-14T10:00',
-      end: '2021-12-14T12:00',
-    },
-    {
-      id: 2,
-      title: 'event 2',
-      start: '2021-12-16T13:00',
-      end: '2021-12-16T18:00',
-    },
-    { id: 3, title: 'event 3', start: '2021-12-17', end: '2021-12-20' },
-    { id: 4, title: 'event 4', start: '2021-12-18', end: '2021-12-18' },
-  ]);
+  const [events, setEvents] = useState([]);
   const [title, setTitle] = useState("");
   const [startDay, setStartDay] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -40,10 +25,6 @@ const Calendar = ({ userObj }) => {
   const toggleModal = (arg) => {
     setIsOpen((prev) => !prev);
     setStartDay(arg.dateStr);
-  }
-
-  const handleDateClick = (arg) => { // bind with an arrow function calendar 클릭 이벤트
-    alert(arg.dateStr)
   }
 
   let str = formatDate(new Date(), {
@@ -63,8 +44,8 @@ const Calendar = ({ userObj }) => {
   const onAddCalendar = async (event) => {
     event.preventDefault();
     if (!everydayBtn) {
-      setStartDay(startDay + "T" + startTime);
-      setEndDate(endDate + "T" + endTime);
+      setStartDay(String(startDay + "T" + startTime));
+      setEndDate(String(endDate + "T" + endTime));
     }
     try {
       await addDoc(collection(dbService, "schedules"), {
@@ -111,6 +92,23 @@ const Calendar = ({ userObj }) => {
   const toggleBtn = (arg) => {
     setEverydayBtn((prev) => !prev);
   }
+
+  useEffect(() => {
+    const q = query(collection(dbService, "schedules"), orderBy("start", "desc"), where("creatorId", "==", userObj.uid)); //userObj.uid가 왜 안될까 ? 
+
+    // unsubscribe(); 유저 로그 아웃 시에 onSnapshot 수신 대기 상태 제거해줘야함
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const eventArray = querySnapshot.docs.map(doc => {
+        return {
+          id: doc.id,
+          ...doc.data()
+        }
+      });
+      setEvents(eventArray);
+    });
+
+    console.log("useEffect");
+  }, [userObj.uid]);
 
   return (
     <>
