@@ -5,7 +5,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import Modal from "react-modal";
 import { addDoc, collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { dbService } from "fBase";
+import { authService, dbService } from "fBase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Calendar = ({ userObj }) => {
   const [eventColor, SetEventColor] = useState("red");
@@ -21,6 +22,8 @@ const Calendar = ({ userObj }) => {
   const [endTime, setEndTime] = useState("");
 
   Modal.setAppElement("#root");
+
+  const closeModal = (prev) => setIsOpen((prev) => !prev);
 
   const toggleModal = (arg) => {
     setIsOpen((prev) => !prev);
@@ -106,8 +109,11 @@ const Calendar = ({ userObj }) => {
       });
       setEvents(eventArray);
     });
-
-    console.log("useEffect");
+    onAuthStateChanged(authService, (user) => {
+      if (user == null) {
+        unsubscribe();
+      }
+    });
   }, [userObj.uid]);
 
   return (
@@ -209,7 +215,7 @@ const Calendar = ({ userObj }) => {
             <button type="submit">완료</button>
 
           </form>
-          <button onClick={toggleModal}>닫기</button>
+          <button onClick={closeModal}>닫기</button>
 
         </Modal>
       </div>

@@ -6,7 +6,7 @@ const LogOut = ({ userObj }) => {
   const navigate = useNavigate();
 
   const onLogOutClick = () => {
-    authService.LogOut();
+    authService.signOut();
     navigate('/');
 
 
