@@ -46,10 +46,10 @@ const Calendar = ({ userObj }) => {
 
   const onAddCalendar = async (event) => {
     event.preventDefault();
-    if (!everydayBtn) {
-      setStartDay(String(startDay + "T" + startTime));
-      setEndDate(String(endDate + "T" + endTime));
-    }
+    // if (!everydayBtn) {
+    //   setStartDay(String(startDay + "T" + startTime));
+    //   setEndDate(String(endDate + "T" + endTime));
+    // } 구현 예정
     try {
       await addDoc(collection(dbService, "schedules"), {
         title: title,
@@ -226,16 +226,16 @@ const Calendar = ({ userObj }) => {
           headerToolbar={{
             center: 'dayGridMonth,timeGridWeek,timeGridDay new',
           }}
-          dateClick={toggleModal} // 클릭 이벤트
+          dateClick={toggleModal} // 그리드 클릭 이벤트
           customButtons={{
             new: {
               text: 'new',
-              click: newButtonClick,
+              click: newButtonClick, // 커스텀 버튼 (New)
             },
           }}
-          eventClick={eventClick}
-          events={events}
-          eventColor={eventColor}
+          eventClick={eventClick} // 이벤트 클릭 이벤트
+          events={events} // 캘린더에 표시되는 이벤트
+          eventColor={eventColor} // 이벤트 색상
         />
       </div>
 
