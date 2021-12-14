@@ -2,7 +2,7 @@ import { authService } from "fBase";
 import React from "react";
 import { useNavigate } from "react-router";
 
-const LogOut = ({ userObj }) => {
+const LogOut = () => {
   const navigate = useNavigate();
 
   const onLogOutClick = () => {
