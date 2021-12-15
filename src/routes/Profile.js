@@ -8,7 +8,14 @@ const Profile = ({ userObj }) => {
 
 
   const changeProfileImg = (event) => {
-    console.log(event);
+    const { target: { files } } = event;
+    const imgFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (endEvent) => {
+      const { currentTarget: { result } } = endEvent;
+      setNewPhoto(result);
+    }
+    reader.readAsDataURL(imgFile);
 
     //setNewPhoto();
   }
@@ -21,9 +28,22 @@ const Profile = ({ userObj }) => {
     setNewDisplayName(value);
   }
 
-  const onSubmitProfileInfo = (event) => {
+  const onSubmitProfileUpdate = async (event) => {
     event.preventDefault();
-
+    if ((userObj.photoURL !== newPhoto) && (userObj.displayName !== newDisplayName)) {
+      await updateProfile(userObj, {
+        displayName: newDisplayName,
+        photoURL: newPhoto
+      })
+    } else if (userObj.displayName !== newDisplayName) {
+      await updateProfile(userObj, {
+        displayName: newDisplayName,
+      })
+    } else if (userObj.photoURL !== newPhoto) {
+      await updateProfile(userObj, {
+        photoURL: newPhoto
+      })
+    }
   }
 
   const onCancel = () => {
@@ -35,10 +55,14 @@ const Profile = ({ userObj }) => {
   return (
     <>
       <h2>프로필 편집</h2>
-      <form onSubmit={onSubmitProfileInfo}>
+      <form onSubmit={onSubmitProfileUpdate}>
         <div style={{ display: "flex" }}>
           <div>
-            <img style={{ borderRadius: "40px" }} src={newPhoto} alt={userObj.displayName} />
+            <img
+              style={{ backgroundImage: newPhoto, borderRadius: "40px", width: "50px", height: "50px" }}
+              src={newPhoto}
+              alt={userObj.displayName}
+            />
             <br />
             <label htmlFor="input-file">
               이미지 추가
@@ -47,7 +71,8 @@ const Profile = ({ userObj }) => {
               id="input-file"
               type="file"
               name="changeImg"
-              onClick={changeProfileImg}
+              accept="image/*"
+              onChange={changeProfileImg}
               style={{ display: "none" }}
             />
             <br />
