@@ -1,13 +1,16 @@
 import { updateProfile } from "firebase/auth";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router";
 const Profile = ({ userObj }) => {
+  const navigate = useNavigate();
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
 
-  const changeProfileImg = () => {
-    console.log("change");
+  const changeProfileImg = (event) => {
+    console.log(event);
+
+    //setNewPhoto();
   }
 
   const deleteProfileImg = () => {
@@ -23,6 +26,12 @@ const Profile = ({ userObj }) => {
 
   }
 
+  const onCancel = () => {
+    navigate('/');
+  }
+
+
+
   return (
     <>
       <h2>프로필 편집</h2>
@@ -31,17 +40,30 @@ const Profile = ({ userObj }) => {
           <div>
             <img style={{ borderRadius: "40px" }} src={newPhoto} alt={userObj.displayName} />
             <br />
-            <button
+            <label htmlFor="input-file">
+              이미지 추가
+            </label>
+            <input
+              id="input-file"
+              type="file"
               name="changeImg"
               onClick={changeProfileImg}
-            >이미지 변경</button>
-            <button
+              style={{ display: "none" }}
+            />
+            <br />
+            <label htmlFor="delete-file">
+              이미지 삭제
+            </label>
+            <input
+              id="delete-file"
+              type="button"
               name="deleteImg"
               onClick={deleteProfileImg}
-            >이미지 삭제</button>
+              style={{ display: "none" }}
+            />
           </div>
           <div>
-            <h1>이름</h1>
+            <h2>이름</h2>
             <input
               type="text"
               name="changeName"
@@ -52,7 +74,7 @@ const Profile = ({ userObj }) => {
         </div>
         <div>
           <button type="submit">완료</button>
-          <button type="reset">취소</button>
+          <button type="reset" onClick={onCancel}>취소</button>
         </div>
       </form>
     </>
