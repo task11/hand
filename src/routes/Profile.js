@@ -1,6 +1,9 @@
 import { updateProfile } from "firebase/auth";
+import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { storageService } from "fBase";
 const Profile = ({ userObj }) => {
   const navigate = useNavigate();
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
@@ -16,8 +19,6 @@ const Profile = ({ userObj }) => {
       setNewPhoto(result);
     }
     reader.readAsDataURL(imgFile);
-
-    //setNewPhoto();
   }
 
   const deleteProfileImg = () => {
@@ -30,20 +31,21 @@ const Profile = ({ userObj }) => {
 
   const onSubmitProfileUpdate = async (event) => {
     event.preventDefault();
-    if ((userObj.photoURL !== newPhoto) && (userObj.displayName !== newDisplayName)) {
-      await updateProfile(userObj, {
-        displayName: newDisplayName,
-        photoURL: newPhoto
-      })
-    } else if (userObj.displayName !== newDisplayName) {
-      await updateProfile(userObj, {
-        displayName: newDisplayName,
-      })
-    } else if (userObj.photoURL !== newPhoto) {
-      await updateProfile(userObj, {
-        photoURL: newPhoto
-      })
-    }
+    let newPhotoUrl = "";
+
+    const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+    const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
+    newPhotoUrl = await getDownloadURL(response.ref);
+
+    await updateProfile(userObj, {
+      displayName: newDisplayName,
+      photoURL: newPhotoUrl
+    })
+
+    navigate('/');
+
+
+
   }
 
   const onCancel = () => {
@@ -59,7 +61,7 @@ const Profile = ({ userObj }) => {
         <div style={{ display: "flex" }}>
           <div>
             <img
-              style={{ backgroundImage: newPhoto, borderRadius: "40px", width: "50px", height: "50px" }}
+              style={{ backgroundImage: newPhoto, borderRadius: "40px", width: "100px", height: "100px" }}
               src={newPhoto}
               alt={userObj.displayName}
             />
