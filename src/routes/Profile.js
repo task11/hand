@@ -36,16 +36,13 @@ const Profile = ({ userObj }) => {
     const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
     const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
     newPhotoUrl = await getDownloadURL(response.ref);
-
-    await updateProfile(userObj, {
-      displayName: newDisplayName,
-      photoURL: newPhotoUrl
-    })
-
+    if (userObj.photoURL !== newPhotoUrl) {
+      await updateProfile(userObj, {
+        displayName: newDisplayName,
+        photoURL: newPhotoUrl
+      })
+    }
     navigate('/');
-
-
-
   }
 
   const onCancel = () => {
