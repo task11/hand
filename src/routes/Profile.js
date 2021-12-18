@@ -33,14 +33,20 @@ const Profile = ({ userObj }) => {
     event.preventDefault();
     let newPhotoUrl = "";
 
-    const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
-    const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
-    newPhotoUrl = await getDownloadURL(response.ref);
+
     if (userObj.photoURL !== newPhotoUrl) {
+      const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
+      newPhotoUrl = await getDownloadURL(response.ref);
+
+
       await updateProfile(userObj, {
         displayName: newDisplayName,
-        photoURL: newPhotoUrl
+        photoURL: newPhotoUrl,
+
       })
+
+
     }
     navigate('/');
   }
