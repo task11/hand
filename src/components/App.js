@@ -25,17 +25,18 @@ function App() {
   return (
     <div>
       {init ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "로딩중..."}
-      <div>
-        <footer style={{
-          width: "100%",
-          height: "0px", /* footer의 높이 */
-          position: "absolute",
-          bottom: "0",
-          left: "0"
-        }}>& copy; {new Date().getFullYear()} have a nice day</footer>
-      </div>
+      <footer className="font-bold m-12"
+      >& copy; {new Date().getFullYear()} have a nice day</footer>
     </div >
   );
 }
+
+// style={{
+//   width: "100%",
+//   height: "0px", /* footer의 높이 */
+//   position: "absolute",
+//   bottom: "0",
+//   left: "0"
+// }}
 
 export default App;

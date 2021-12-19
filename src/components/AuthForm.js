@@ -60,7 +60,7 @@ const AuthForm = () => {
       <button onClick={toggleAccount}>
         {newAccount ? "Sign In" : "Create Account"}
       </button>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} >
         {newAccount &&
           <input
             name="text"
