@@ -57,9 +57,7 @@ const AuthForm = () => {
 
   return (
     <div>
-      <button onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-      </button>
+
       <form onSubmit={onSubmit} >
         {newAccount &&
           <input
@@ -76,6 +74,7 @@ const AuthForm = () => {
           value={email}
           placeholder="이메일(example@gmail.com)"
         />
+        <br />
         <input
           name="password"
           type="password"
@@ -85,8 +84,12 @@ const AuthForm = () => {
         />
         <input
           type="submit"
-          value={newAccount ? "Create Account" : "Log In"}
+          value={newAccount ? "가입" : "로그인"}
         />
+        <br />
+        <button onClick={toggleAccount}>
+          {newAccount ? "로그인" : "회원가입"}
+        </button>
         {error && <span>{error}</span>}
       </form>
     </div>

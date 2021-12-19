@@ -379,15 +379,28 @@ Ensure the default browser behavior of the `hidden` attribute.
 .m-12 {
   margin: 3rem;
 }
+.m-5 {
+  margin: 1.25rem;
+}
 .flex {
   display: flex;
 }
 .border {
   border-width: 1px;
 }
+.text-center {
+  text-align: center;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
 .font-bold {
   font-weight: 700;
 }
 .outline {
   outline-style: solid;
+}
+.outline-2 {
+  outline-width: 2px;
 }
