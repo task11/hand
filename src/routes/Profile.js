@@ -2,13 +2,14 @@ import { updateProfile } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storageService } from "fBase";
+
 const Profile = ({ userObj }) => {
+  const defaultProfilePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/hand-f5ddb.appspot.com/o/iFkTyS72E1TB0syOuhKZ7T5fXAj2%2FbasicProfile.jpeg?alt=media&token=c193e014-be80-4242-8845-62bcb5a93823";
   const navigate = useNavigate();
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
-
 
   const changeProfileImg = (event) => {
     const { target: { files } } = event;
@@ -19,11 +20,27 @@ const Profile = ({ userObj }) => {
       setNewPhoto(result);
     }
     reader.readAsDataURL(imgFile);
+
   }
 
-  const deleteProfileImg = () => {
-    console.log("delete");
+  const deleteProfileImg = async () => {
+    var deletePhotoRef = ref(storageService, userObj.photoURL);
+    const ok = window.confirm("정말로 삭제할까요?");
+    if (ok && (userObj.photoURL !== defaultProfilePhotoUrl)) {
+      await deleteObject(deletePhotoRef);
+      await updateProfile(userObj, {
+        photoURL: defaultProfilePhotoUrl,
+      })
+      setNewPhoto(userObj.photoURL)
+    }
+
+    // desertRef.delete().then(function () {
+    //   // File deleted successfully
+    // }).catch(function (error) {
+    //   // Uh-oh, an error occurred!
+    // });
   }
+
   const onChange = (event) => {
     const { target: { value } } = event;
     setNewDisplayName(value);
@@ -33,20 +50,19 @@ const Profile = ({ userObj }) => {
     event.preventDefault();
     let newPhotoUrl = "";
 
-
     if (userObj.photoURL !== newPhotoUrl) {
       const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
       const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
       newPhotoUrl = await getDownloadURL(response.ref);
 
+      //이전 프로필 사진 storage에서 제거
+      console.log(response);
+      console.log(newPhotoUrl);
 
       await updateProfile(userObj, {
         displayName: newDisplayName,
         photoURL: newPhotoUrl,
-
       })
-
-
     }
     navigate('/');
   }
