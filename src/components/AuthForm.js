@@ -8,7 +8,7 @@ import {
 
 
 const AuthForm = () => {
-  const defaultProfilePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/hand-f5ddb.appspot.com/o/iFkTyS72E1TB0syOuhKZ7T5fXAj2%2FbasicProfile.jpeg?alt=media&token=c193e014-be80-4242-8845-62bcb5a93823";
+  const defaultProfilePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/hand-f5ddb.appspot.com/o/basicProfile.jpeg?alt=media&token=7e5fa233-5f6f-43a0-894a-65388faaf895";
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");

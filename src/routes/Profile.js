@@ -6,7 +6,7 @@ import { deleteObject, getDownloadURL, ref, uploadString } from "firebase/storag
 import { storageService } from "fBase";
 
 const Profile = ({ userObj }) => {
-  const defaultProfilePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/hand-f5ddb.appspot.com/o/iFkTyS72E1TB0syOuhKZ7T5fXAj2%2FbasicProfile.jpeg?alt=media&token=c193e014-be80-4242-8845-62bcb5a93823";
+  const defaultProfilePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/hand-f5ddb.appspot.com/o/basicProfile.jpeg?alt=media&token=7e5fa233-5f6f-43a0-894a-65388faaf895";
   const navigate = useNavigate();
   const [newPhoto, setNewPhoto] = useState(userObj.photoURL);
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
@@ -24,7 +24,7 @@ const Profile = ({ userObj }) => {
   }
 
   const deleteProfileImg = async () => {
-    var deletePhotoRef = ref(storageService, userObj.photoURL);
+    const deletePhotoRef = ref(storageService, userObj.photoURL);
     const ok = window.confirm("정말로 삭제할까요?");
     if (ok && (userObj.photoURL !== defaultProfilePhotoUrl)) {
       await deleteObject(deletePhotoRef);
@@ -32,6 +32,7 @@ const Profile = ({ userObj }) => {
         photoURL: defaultProfilePhotoUrl,
       })
       setNewPhoto(userObj.photoURL)
+      navigate('/');
     }
 
     // desertRef.delete().then(function () {
@@ -54,10 +55,11 @@ const Profile = ({ userObj }) => {
       const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
       const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
       newPhotoUrl = await getDownloadURL(response.ref);
-
       //이전 프로필 사진 storage에서 제거
-      console.log(response);
-      console.log(newPhotoUrl);
+      if (userObj.photoURL !== defaultProfilePhotoUrl) {
+        const deletePhotoRef = ref(storageService, userObj.photoURL);
+        await deleteObject(deletePhotoRef);
+      }
 
       await updateProfile(userObj, {
         displayName: newDisplayName,
