@@ -23,13 +23,13 @@ const OAuthForm = () => {
   }
 
   return (
-    <ul className="text-center">
-      <li className="inline-block ">
+    <ul>
+      <li className="inline-block m-1">
         <button onClick={onSocialClick} name="google">
           <FontAwesomeIcon icon={faGoogle} />
         </button>
       </li>
-      <li className="inline-block ">
+      <li className="inline-block m-1">
         <button onClick={onSocialClick} name="facebook">
           <FontAwesomeIcon icon={faFacebook} />
         </button>

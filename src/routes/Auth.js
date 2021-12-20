@@ -5,14 +5,12 @@ import React from "react";
 
 const Auth = () => {
   return (
-    <div className="text-center bg-orange-100 w-full h-full">
-      < div className=" font-bold text-5xl" >
-        <span>HAND</span>
-      </div >
+    <div className="flex flex-col justify-center items-center h-screen">
+      <h3 className="text-8xl text-black">HAND</h3>
+      <br />
+      <br />
       <AuthForm />
-      <div>
-        <OAuthForm />
-      </div>
+      <OAuthForm />
     </div >
   );
 };

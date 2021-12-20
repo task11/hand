@@ -56,18 +56,17 @@ const AuthForm = () => {
   }
 
   return (
-    <div>
-
+    <div className="text-center">
       <form onSubmit={onSubmit} >
         {newAccount &&
-          <input
+          <input className="m-1 w-72 h-12 bg-gray-400 shadow-md placeholder-white"
             name="text"
             type="text"
             value={username}
             onChange={onChange}
             placeholder="이름(2자 이상)"
           />}
-        <input
+        <input className="m-1 w-72 h-12 bg-gray-400 shadow-md placeholder-white"
           name="email"
           type="email"
           onChange={onChange}
@@ -75,22 +74,28 @@ const AuthForm = () => {
           placeholder="이메일(example@gmail.com)"
         />
         <br />
-        <input
+        <input className="m-1 w-72 h-12 bg-gray-400 shadow-md placeholder-white"
           name="password"
           type="password"
           onChange={onChange}
           value={password}
           placeholder="영문, 숫자, 특문 중 2개 조합 10자 이상"
         />
-        <input
+        <br />
+        <br />
+        <input className="m-1 w-32 h-6 rounded-3xl bg-yellow-300 text-black font-bold"
           type="submit"
-          value={newAccount ? "가입" : "로그인"}
+          value={newAccount ? "Sign In" : "Log In"}
         />
         <br />
-        <button onClick={toggleAccount}>
-          {newAccount ? "로그인" : "회원가입"}
+        <button
+          className="m-1 w-32 h-6 rounded-3xl bg-blue-300 text-black font-bold"
+          onClick={toggleAccount}>
+          {newAccount ? "Log In" : "Join"}
         </button>
+        <br />
         {error && <span>{error}</span>}
+        <br />
       </form>
     </div>
   );
