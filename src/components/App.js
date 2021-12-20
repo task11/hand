@@ -24,8 +24,13 @@ function App() {
 
   return (
     <div>
-      {init ? <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "로딩중..."}
-      <footer className="font-bold m-12"
+      {init ?
+        <AppRouter className="w-full h-full" isLoggedIn={Boolean(userObj)} userObj={userObj} /> :
+        <div className="text-center">
+          로딩중...
+        </div>
+      }
+      <footer className="font-bold w-full h-10 absolute bottom-0 left-0"
       >& copy; {new Date().getFullYear()} have a nice day</footer>
     </div >
   );

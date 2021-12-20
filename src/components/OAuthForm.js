@@ -10,7 +10,6 @@ import {
   faFacebook
 } from "@fortawesome/free-brands-svg-icons";
 
-
 const OAuthForm = () => {
   const onSocialClick = async (event) => {
     const { target: { name } } = event;
@@ -24,14 +23,18 @@ const OAuthForm = () => {
   }
 
   return (
-    <div className="m-5">
-      <button onClick={onSocialClick} name="google">
-        <FontAwesomeIcon icon={faGoogle} />
-      </button>
-      <button onClick={onSocialClick} name="facebook">
-        <FontAwesomeIcon icon={faFacebook} />
-      </button>
-    </div>
+    <ul className="text-center">
+      <li className="inline-block ">
+        <button onClick={onSocialClick} name="google">
+          <FontAwesomeIcon icon={faGoogle} />
+        </button>
+      </li>
+      <li className="inline-block ">
+        <button onClick={onSocialClick} name="facebook">
+          <FontAwesomeIcon icon={faFacebook} />
+        </button>
+      </li>
+    </ul>
   );
 };
 
