@@ -10,6 +10,8 @@ import {
 } from "@firebase/firestore";
 import { onAuthStateChanged } from "@firebase/auth";
 import ToDoEdit from "./ToDo";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const ToDoList = ({ userObj }) => {
@@ -78,7 +80,9 @@ const ToDoList = ({ userObj }) => {
             onChange={onChange}
             placeholder="할 일을 입력하세요.."
           />
-          <button type="submit" name="add">+</button>
+          <button type="submit" name="add">
+            <FontAwesomeIcon icon={faPlusSquare} />
+          </button>
           {error && <span>{error}</span>}
         </form>
         <div>

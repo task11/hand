@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogOut from "./LogOut";
-import Cookie from "../static/NavLogo.svg"
+import Cookie from "../static/NavLogo2.svg"
+import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navigator = () => {
   const [setToggle, setSetToggle] = useState(false);
@@ -9,27 +11,29 @@ const Navigator = () => {
   const clickToggle = (prev) => setSetToggle((prev) => !prev);
 
   return (
-    <nav>
-      <ul className=" m-4 p-4 w-full h-14 text-base font-bold">
-        <li className="inline-block">
+    <nav className="bg-gray-200 relative">
+      <ul className="w-full h-auto text-lg font-bold p-7">
+        <li className="inline-block pt-1">
           <img src={Cookie} />
         </li>
-
-        <li className="inline-block float-right pr-14">
-          <span onClick={clickToggle}>톱니</span>
+        <li className="inline-block float-right pt-2 pr-14">
+          <span onClick={clickToggle}>
+            <FontAwesomeIcon icon={faCog} />
+          </span>
           {setToggle
             &&
-            <div>
-              <LogOut />
+            <div className="relative left-3 ">
               <Link to="/setting">설정</Link>
+              <br />
+              <LogOut />
             </div>
           }
         </li>
-        <li className="inline-block float-right pr-14 ">
+        <li className="inline-block float-right pt-2 pr-14 ">
           <Link to="/profile">프로필</Link>
         </li>
-        <li className="inline-block float-right pr-14 ">
-          <Link to="/">홈</Link>
+        <li className="inline-block float-right pt-2 pr-14 ">
+          <Link to="/">HOME</Link>
         </li>
       </ul>
 

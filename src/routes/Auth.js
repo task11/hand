@@ -1,7 +1,7 @@
 import AuthForm from "components/AuthForm";
 import OAuthForm from "components/OAuthForm";
 import React from "react";
-import Cookie from "../static/MainLogo.svg"
+import Cookie from "../static/MainLogo2.svg"
 
 const Auth = () => {
   return (

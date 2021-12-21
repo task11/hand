@@ -51,7 +51,9 @@ const Profile = ({ userObj }) => {
     event.preventDefault();
     let newPhotoUrl = "";
 
-    if (userObj.photoURL !== newPhotoUrl) {
+    if (userObj.photoURL === newPhotoUrl && userObj.displayName === newDisplayName) {
+      navigate('/');
+    } else if (userObj.photoURL !== newPhotoUrl) {
       const profilePhotoRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
       const response = await uploadString(profilePhotoRef, newPhoto, "data_url");
       newPhotoUrl = await getDownloadURL(response.ref);
@@ -76,7 +78,7 @@ const Profile = ({ userObj }) => {
 
 
   return (
-    <>
+    <div className="flex flex-col items-center h-screen">
       <h2>프로필 편집</h2>
       <form onSubmit={onSubmitProfileUpdate}>
         <div style={{ display: "flex" }}>
@@ -125,7 +127,7 @@ const Profile = ({ userObj }) => {
           <button type="reset" onClick={onCancel}>취소</button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

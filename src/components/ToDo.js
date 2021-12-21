@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService } from "fBase";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const ToDo = ({ toDoObj }) => {
   const [editToggle, setEditToggle] = useState(false);
@@ -57,7 +59,7 @@ const ToDo = ({ toDoObj }) => {
 
   return (
     <>
-      <div >
+      <div className="relative">
         <input type="checkbox"
           value={isChecked}
           onChange={onCheck}
@@ -78,10 +80,12 @@ const ToDo = ({ toDoObj }) => {
           ) :
           <span>{toDoObj.task}</span>
         }
-        <input
-          value="..."
-          type="button"
-          onClick={onEditClick} />
+        <button
+          className
+          onClick={onEditClick}
+        >
+          <FontAwesomeIcon icon={faEdit} />
+        </button>
         {
           editToggle &&
           (

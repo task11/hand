@@ -10,6 +10,8 @@ import {
   where
 } from "@firebase/firestore";
 import Memo from "./Memo";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // 수정 기능 추가
 const MemoList = ({ userObj }) => {
@@ -78,7 +80,9 @@ const MemoList = ({ userObj }) => {
             onChange={onChange}
             placeholder="텍스트를 입력하세요."
           />
-          <button type="submit" name="add">추가</button>
+          <button type="submit" name="add">
+            <FontAwesomeIcon icon={faPlusSquare} />
+          </button>
           {error && <span>{error}</span>}
         </form>
       </div>
