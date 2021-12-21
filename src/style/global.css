@@ -392,6 +392,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .m-5 {
   margin: 1.25rem;
 }
+.m-9 {
+  margin: 2.25rem;
+}
+.m-3\.5 {
+  margin: 0.875rem;
+}
+.m-3 {
+  margin: 0.75rem;
+}
 .m-2\.5 {
   margin: 0.625rem;
 }
@@ -438,6 +447,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-3\/5 {
   height: 60%;
 }
+.h-4\/5 {
+  height: 80%;
+}
 .w-full {
   width: 100%;
 }
@@ -453,6 +465,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-4\/5 {
   width: 80%;
 }
+.w-3\/5 {
+  width: 60%;
+}
+.w-2\/5 {
+  width: 40%;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -464,6 +482,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .rounded-3xl {
   border-radius: 1.5rem;
+}
+.rounded-2xl {
+  border-radius: 1rem;
 }
 .rounded-xl {
   border-radius: 0.75rem;
@@ -504,6 +525,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-base {
   font-size: 1rem;

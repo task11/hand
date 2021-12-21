@@ -46,7 +46,7 @@ const Memo = ({ memoObj }) => {
 
 
   return (
-    <div className="w-28 h-28">
+    <div className="m-3.5 inline-block border-2 rounded-xl w-32 h-32 bg-gray-200">
       {isEdit ?
         <form onSubmit={onEditSubmit}>
           <input

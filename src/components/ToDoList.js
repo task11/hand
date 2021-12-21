@@ -66,9 +66,10 @@ const ToDoList = ({ userObj }) => {
   }, [userObj.uid])
 
   return (
-    <div className=" m-5 w-full h-1/2">
-      <div>To-Do-List</div>
-      <div>
+    <div className=" m-5 w-4/5 h-1/2 border-2 rounded-2xl">
+      <div className="text-center m-9">
+        <span className="font-bold text-2xl" >To-Do-List</span>
+        <br />
         <form onSubmit={onSubmit}>
           <input
             name="text"
@@ -80,18 +81,18 @@ const ToDoList = ({ userObj }) => {
           <button type="submit" name="add">+</button>
           {error && <span>{error}</span>}
         </form>
-      </div>
-      <div>
-        <ul>
-          {toDos.map((toDo) => {
-            return (
-              <ToDoEdit
-                key={toDo.id}
-                toDoObj={toDo}
-              />
-            );
-          })}
-        </ul>
+        <div>
+          <ul>
+            {toDos.map((toDo) => {
+              return (
+                <ToDoEdit
+                  key={toDo.id}
+                  toDoObj={toDo}
+                />
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </div>
   );
