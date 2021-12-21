@@ -85,13 +85,13 @@ const AuthForm = () => {
         />
         <br />
         <br />
-        <input className="m-1 w-32 h-6 rounded-3xl bg-yellow-300 font-bold"
+        <input className="m-1 w-32 h-6 rounded-3xl bg-gray-400 font-bold"
           type="submit"
           value={newAccount ? "Sign In" : "Log In"}
         />
         <br />
         <button
-          className="m-1 w-32 h-6 rounded-3xl bg-blue-300 font-bold"
+          className="m-1 w-32 h-6 rounded-3xl bg-gray-400 font-bold"
           onClick={toggleAccount}>
           {newAccount ? "Log In" : "Join"}
         </button>

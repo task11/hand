@@ -66,7 +66,7 @@ const ToDoList = ({ userObj }) => {
   }, [userObj.uid])
 
   return (
-    <div className=" m-5 w-4/5 h-1/2 border-2 rounded-2xl">
+    <div className=" m-5 w-5/6 h-1/2 border-2 rounded-2xl">
       <div className="text-center m-9">
         <span className="font-bold text-2xl" >To-Do-List</span>
         <br />

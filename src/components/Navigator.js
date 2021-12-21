@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogOut from "./LogOut";
+import Cookie from "../static/NavLogo.svg"
 
 const Navigator = () => {
   const [setToggle, setSetToggle] = useState(false);
@@ -8,15 +9,13 @@ const Navigator = () => {
   const clickToggle = (prev) => setSetToggle((prev) => !prev);
 
   return (
-    <nav >
-      <ul className=" m-2.5 p-2.5 bg-gray-200 w-full h-11 rounded-lg text-base font-bold">
+    <nav>
+      <ul className=" m-4 p-4 w-full h-14 text-base font-bold">
         <li className="inline-block">
-          <Link to="/">홈</Link>
+          <img src={Cookie} />
         </li>
-        <li className="inline-block">
-          <Link to="/profile">프로필</Link>
-        </li>
-        <li className="inline-block">
+
+        <li className="inline-block float-right pr-14">
           <span onClick={clickToggle}>톱니</span>
           {setToggle
             &&
@@ -25,6 +24,12 @@ const Navigator = () => {
               <Link to="/setting">설정</Link>
             </div>
           }
+        </li>
+        <li className="inline-block float-right pr-14 ">
+          <Link to="/profile">프로필</Link>
+        </li>
+        <li className="inline-block float-right pr-14 ">
+          <Link to="/">홈</Link>
         </li>
       </ul>
 
