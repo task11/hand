@@ -66,7 +66,7 @@ const ToDoList = ({ userObj }) => {
   }, [userObj.uid])
 
   return (
-    <div>
+    <div className=" m-5 w-full h-1/2">
       <div>To-Do-List</div>
       <div>
         <form onSubmit={onSubmit}>

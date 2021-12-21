@@ -28,7 +28,7 @@ function App() {
       {init ?
         <>
           <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
-          <footer className="font-bold text-center w-full h-28 absolute bottom-0 left-0 pt-4 text-xs text-slate-400">
+          <footer className="font-bold text-center w-full absolute bottom-0 left-0 pt-4 text-xs text-slate-400">
             <nav>
               <a className="inline-block mx-5 mt-0" href='https://task11.tistory.com' target='_blank'>Blog</a> |
               <a className="inline-block mx-5 mt-0" href='https://github.com/task11' target='_blank'>Github</a>
@@ -38,7 +38,6 @@ function App() {
               <span className="inline-block ">이메일 : 6539305@gmail.com</span><br />
               <span className="inline-block ">Copyright; {new Date().getFullYear()} have a nice day. All Rights Reserved.</span>
             </p>
-
           </footer>
         </>
         :

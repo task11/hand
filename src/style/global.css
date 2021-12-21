@@ -389,6 +389,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .m-1 {
   margin: 0.25rem;
 }
+.m-5 {
+  margin: 1.25rem;
+}
 .m-2\.5 {
   margin: 0.625rem;
 }
@@ -405,9 +408,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-0 {
   margin-bottom: 0px;
 }
-.ml-5 {
-  margin-left: 1.25rem;
-}
 .inline-block {
   display: inline-block;
 }
@@ -417,14 +417,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-screen {
   height: 100vh;
 }
-.h-28 {
-  height: 7rem;
-}
 .h-12 {
   height: 3rem;
 }
 .h-6 {
   height: 1.5rem;
+}
+.h-28 {
+  height: 7rem;
+}
+.h-1\/2 {
+  height: 50%;
+}
+.h-32 {
+  height: 8rem;
+}
+.h-11 {
+  height: 2.75rem;
+}
+.h-3\/5 {
+  height: 60%;
 }
 .w-full {
   width: 100%;
@@ -434,6 +446,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-32 {
   width: 8rem;
+}
+.w-28 {
+  width: 7rem;
+}
+.w-4\/5 {
+  width: 80%;
 }
 .flex-col {
   flex-direction: column;
@@ -447,18 +465,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-3xl {
   border-radius: 1.5rem;
 }
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
 .border {
   border-width: 1px;
 }
-.border-t-2 {
-  border-top-width: 2px;
-}
-.border-solid {
-  border-style: solid;
-}
-.border-slate-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(148 163 184 / var(--tw-border-opacity));
+.border-2 {
+  border-width: 2px;
 }
 .bg-gray-200 {
   --tw-bg-opacity: 1;
@@ -487,6 +504,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .text-8xl {
   font-size: 6rem;

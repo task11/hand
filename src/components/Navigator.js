@@ -9,14 +9,14 @@ const Navigator = () => {
 
   return (
     <nav >
-      <ul className="flex">
-        <li className="m-2.5 p-2.5">
+      <ul className=" m-2.5 p-2.5 bg-gray-200 w-full h-11 rounded-lg text-base font-bold">
+        <li className="inline-block">
           <Link to="/">홈</Link>
         </li>
-        <li className="m-2.5 p-2.5">
+        <li className="inline-block">
           <Link to="/profile">프로필</Link>
         </li>
-        <li className="m-2.5 p-2.5">
+        <li className="inline-block">
           <span onClick={clickToggle}>톱니</span>
           {setToggle
             &&

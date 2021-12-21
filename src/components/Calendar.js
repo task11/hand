@@ -125,19 +125,19 @@ const Calendar = ({ userObj }) => {
               position: 'fixed',
               zIndex: 1050,
               top: 300,
-              left: 200,
-              right: 600,
-              bottom: 300,
-              backgroundColor: 'rgba(255, 255, 255, 0.75)'
+              left: 250,
+              right: 650,
+              bottom: 250,
+              backgroundColor: 'rgba(255, 255, 255)'
             },
             content: {
               position: 'fixed',
-              top: 200,
-              left: 200,
-              right: 600,
-              bottom: 200,
+              top: 300,
+              left: 250,
+              right: 650,
+              bottom: 250,
               border: '1px solid #ccc',
-              background: 'rgba(255, 255, 255, 0.8)',
+              background: 'rgba(255, 255, 255)',
               overflow: 'auto',
               WebkitOverflowScrolling: 'touch',
               borderRadius: '4px',
@@ -219,7 +219,7 @@ const Calendar = ({ userObj }) => {
 
         </Modal>
       </div>
-      <div>
+      <div >
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"

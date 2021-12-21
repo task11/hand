@@ -66,7 +66,7 @@ const MemoList = ({ userObj }) => {
 
 
   return (
-    <div>
+    <div className=" m-5 w-full h-1/2">
       <div>MEMO</div>
       <div>
         <form onSubmit={onSubmit}>
@@ -81,7 +81,7 @@ const MemoList = ({ userObj }) => {
           {error && <span>{error}</span>}
         </form>
       </div>
-      <div>
+      <div className="border-2 rounded-xl w-32 h-32 bg-gray-200">
         <ul>
           {memos.map((memo) => {
             return (

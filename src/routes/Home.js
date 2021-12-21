@@ -6,8 +6,8 @@ import React from "react";
 const Home = ({ userObj }) => {
   console.log(userObj);
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ height: "600px", width: "900px" }}>
+    <div className="flex w-full h-3/5">
+      <div className=" m-5 w-4/5 h-3/5">
         <Calendar userObj={userObj} />
       </div>
       <div>
