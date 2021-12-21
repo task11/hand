@@ -9,14 +9,14 @@ const Navigator = () => {
 
   return (
     <nav >
-      <ul style={{ display: "flex" }}>
-        <li style={{ margin: "10px", padding: "10px" }}>
+      <ul className="flex">
+        <li className="m-2.5 p-2.5">
           <Link to="/">홈</Link>
         </li>
-        <li style={{ margin: "10px", padding: "10px" }}>
+        <li className="m-2.5 p-2.5">
           <Link to="/profile">프로필</Link>
         </li>
-        <li style={{ margin: "10px", padding: "10px" }}>
+        <li className="m-2.5 p-2.5">
           <span onClick={clickToggle}>톱니</span>
           {setToggle
             &&

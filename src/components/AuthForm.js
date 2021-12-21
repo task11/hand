@@ -59,14 +59,16 @@ const AuthForm = () => {
     <div className="text-center">
       <form onSubmit={onSubmit} >
         {newAccount &&
-          <input className="m-1 w-72 h-12 bg-gray-400 shadow-md placeholder-white"
+          <input className="m-1 w-72 h-12 bg-gray-200 shadow-md"
             name="text"
             type="text"
             value={username}
             onChange={onChange}
             placeholder="이름(2자 이상)"
-          />}
-        <input className="m-1 w-72 h-12 bg-gray-400 shadow-md placeholder-white"
+          />
+        }
+        <br />
+        <input className="m-1 w-72 h-12 bg-gray-200 shadow-md "
           name="email"
           type="email"
           onChange={onChange}
@@ -74,7 +76,7 @@ const AuthForm = () => {
           placeholder="이메일(example@gmail.com)"
         />
         <br />
-        <input className="m-1 w-72 h-12 bg-gray-400 shadow-md placeholder-white"
+        <input className="m-1 w-72 h-12 bg-gray-200 shadow-md "
           name="password"
           type="password"
           onChange={onChange}
@@ -83,13 +85,13 @@ const AuthForm = () => {
         />
         <br />
         <br />
-        <input className="m-1 w-32 h-6 rounded-3xl bg-yellow-300 text-black font-bold"
+        <input className="m-1 w-32 h-6 rounded-3xl bg-yellow-300 font-bold"
           type="submit"
           value={newAccount ? "Sign In" : "Log In"}
         />
         <br />
         <button
-          className="m-1 w-32 h-6 rounded-3xl bg-blue-300 text-black font-bold"
+          className="m-1 w-32 h-6 rounded-3xl bg-blue-300 font-bold"
           onClick={toggleAccount}>
           {newAccount ? "Log In" : "Join"}
         </button>
