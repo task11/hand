@@ -17,9 +17,9 @@ const Navigator = () => {
           <img src={Cookie} />
         </li>
         <li className="inline-block float-right pt-2 pr-14">
-          <span onClick={clickToggle}>
+          <button onClick={clickToggle}>
             <FontAwesomeIcon icon={faCog} />
-          </span>
+          </button>
           {setToggle
             &&
             <div className="relative left-3 ">

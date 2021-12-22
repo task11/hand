@@ -78,56 +78,69 @@ const Profile = ({ userObj }) => {
 
 
   return (
-    <div className="flex flex-col items-center h-screen">
-      <h2>프로필 편집</h2>
+    <section className="flex w-auto flex-col text-xl items-center h-screen overflow-hidden">
+      <span className="font-bold text-5xl p-10">프로필 수정</span>
       <form onSubmit={onSubmitProfileUpdate}>
-        <div style={{ display: "flex" }}>
-          <div>
-            <img
-              style={{ backgroundImage: newPhoto, borderRadius: "40px", width: "100px", height: "100px" }}
-              src={newPhoto}
-              alt={userObj.displayName}
-            />
-            <br />
-            <label htmlFor="input-file">
-              이미지 추가
-            </label>
-            <input
-              id="input-file"
-              type="file"
-              name="changeImg"
-              accept="image/*"
-              onChange={changeProfileImg}
-              style={{ display: "none" }}
-            />
-            <br />
-            <label htmlFor="delete-file">
-              이미지 삭제
-            </label>
-            <input
-              id="delete-file"
-              type="button"
-              name="deleteImg"
-              onClick={deleteProfileImg}
-              style={{ display: "none" }}
-            />
+        <div className="flex">
+          <div className="mr-6">
+            <div>
+              <img
+                className="bg-['newPhoto'] rounded-full w-44 h-44"
+                src={newPhoto}
+                alt={userObj.displayName}
+              />
+            </div>
+            <div className="text-center mt-3 ">
+              <label className="block cursor-pointer border-2 border-slate-300 p-1" htmlFor="input-file">
+                이미지 추가
+              </label>
+              <input
+                className="hidden "
+                id="input-file"
+                type="file"
+                name="changeImg"
+                accept="image/*"
+                onChange={changeProfileImg}
+
+              />
+              <label className="block cursor-pointer border-2 border-slate-300 mt-1 p-1" htmlFor="delete-file">
+                이미지 삭제
+              </label>
+              <input
+                className="hidden"
+                id="delete-file"
+                type="button"
+                name="deleteImg"
+                onClick={deleteProfileImg}
+              />
+            </div>
           </div>
-          <div>
-            <h2>이름</h2>
+          <div className="mt-8">
+            <label className="block" htmlFor="input-text">이름</label>
             <input
+              className="block border-4 bg-slate-300 border-slate-300 mt-2"
+              id="input-text"
               type="text"
               name="changeName"
               value={newDisplayName}
               onChange={onChange}
             ></input>
+            <span className="text-slate-300 text-xs">* 이름은 최소 2자, 최대 20자 까지 입력이 가능해요</span>
           </div>
         </div>
-        <div>
-          <button type="submit">완료</button>
-          <button type="reset" onClick={onCancel}>취소</button>
+        <div className="mt-6 mb-2"><hr /></div>
+        <div className="text-2xl">
+          <button
+            className="border-2 bg-slate-300 border-slate-300 m-1 p-1"
+            type="submit">
+            완료
+          </button>
+          <button
+            className="border-2 bg-slate-300 border-slate-300 m-1 p-1"
+            type="reset" onClick={onCancel}>취소</button>
         </div>
       </form>
-    </div>
+    </section >
   );
 };
 
