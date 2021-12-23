@@ -85,7 +85,7 @@ const AuthForm = () => {
         />
         <br />
         <br />
-        <input className="m-1 w-32 h-6 rounded-3xl bg-gray-400 font-bold"
+        <input className="m-1 w-32 h-6 cursor-pointer rounded-3xl bg-gray-400 font-bold"
           type="submit"
           value={newAccount ? "Sign In" : "Log In"}
         />

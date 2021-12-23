@@ -117,129 +117,156 @@ const Calendar = ({ userObj }) => {
   }, [userObj.uid]);
 
   return (
-    <>
-      <div>
-        <Modal
-          style={{
-            overlay: {
-              position: 'fixed',
-              zIndex: 1050,
-              top: 300,
-              left: 250,
-              right: 650,
-              bottom: 250,
-              backgroundColor: 'rgba(255, 255, 255)'
-            },
-            content: {
-              position: 'fixed',
-              top: 300,
-              left: 250,
-              right: 650,
-              bottom: 250,
-              border: '1px solid #ccc',
-              background: 'rgba(255, 255, 255)',
-              overflow: 'auto',
-              WebkitOverflowScrolling: 'touch',
-              borderRadius: '4px',
-              outline: 'none',
-              padding: '20px'
-            }
-          }}
+    <div>
+      <Modal
+        style={{
+          overlay: {
+            position: 'fixed',
+            zIndex: 1050,
+            top: '40%',
+            left: '15%',
+            right: '80%',
+            bottom: '30%',
+            width: '450px',
+            height: 'auto',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            borderRadius: '16px',
+            backgroundColor: 'rgba(255, 255, 255)'
+          },
+          content: {
+            position: 'fixed',
+            top: '40%',
+            left: '15%',
+            right: '80%',
+            bottom: '30%',
+            width: '450px',
+            height: 'auto',
+            border: '1px solid #ccc',
+            background: 'rgba(255, 255, 255)',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '16px',
+            outline: 'none',
+            padding: '20px',
+          }
+        }}
 
-          isOpen={isOpen}
-          onRequestClose={toggleModal}
-          contentLabel="My dialog"
-        >
-          <div>일정 추가</div>
-          <input type="checkbox" value={everydayBtn} onClick={toggleBtn} />
-          <span>종일</span>
-          <form onSubmit={onAddCalendar}>
-            {everydayBtn ?
-              <>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={onSetTitle}
-                  placeholder="일정명"
-                />
-                <span>시작시간</span>
-                <input
-                  type="date"
-                  value={startDay}
-                  readOnly
-                />
-                <br />
-                <span>종료시간</span>
-                <input
-                  name="endDate"
-                  type="date"
-                  value={endDate}
-                  onChange={onEndDateChange}
-                />
-              </>
-              :
-              <>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={onSetTitle}
-                  placeholder="일정명"
-                />
-                <span>시작시간</span>
-                <input type="date"
-                  value={startDay}
-                  readOnly />
-                <input
-                  name="startTime"
-                  type="time"
-                  value={startTime}
-                  onChange={onStartTimeChange}
-                />
-                <br />
-                <span>종료시간</span>
-                <input
-                  name="endDate"
-                  type="date"
-                  value={endDate}
-                  onChange={onEndDateChange}
-                />
-                <input
-                  name="endTime"
-                  type="time"
-                  value={endTime}
-                  onChange={onEndDateChange}
-                />
-              </>
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="My dialog"
+      >
+        <section className="flex flex-col text-base">
+          <div className="font-bold text-lg">
+            <p >일정 추가</p>
+          </div>
+          <div className="">
+            <input type="checkbox" value={everydayBtn} onClick={toggleBtn} />
+            <span>종일</span>
+          </div>
+          <div className="">
+            <form onSubmit={onAddCalendar}>
+              {everydayBtn ?
+                <>
+                  <input
+                    className="border-2 bg-slate-300 border-slate-300 m-1 p-1"
+                    type="text"
+                    value={title}
+                    onChange={onSetTitle}
+                    placeholder="일정명"
+                  />
+                  <div>
+                    <span>시작시간</span>
+                    <input
+                      className="border-1 bg-slate-300 border-slate-300 m-1 p-1"
+                      type="date"
+                      value={startDay}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <span>종료시간</span>
+                    <input
+                      className="border-1 bg-slate-300 border-slate-300 m-1 p-1"
+                      name="endDate"
+                      type="date"
+                      value={endDate}
+                      onChange={onEndDateChange}
+                    />
+                  </div>
+                </>
+                :
+                <>
+                  <input
+                    className="border-2 bg-slate-300 border-slate-300 m-1 p-1"
+                    type="text"
+                    value={title}
+                    onChange={onSetTitle}
+                    placeholder="일정명"
+                  />
+                  <div>
+                    <span>시작시간</span>
+                    <input
+                      className="border-1 bg-slate-300 border-slate-300 m-1 p-1"
+                      type="date"
+                      value={startDay}
+                      readOnly />
+                    <input
+                      className="border-1 bg-slate-300 border-slate-300 m-1 p-1"
+                      name="startTime"
+                      type="time"
+                      value={startTime}
+                      onChange={onStartTimeChange}
+                    />
+                  </div>
+                  <div>
+                    <span>종료시간</span>
+                    <input
+                      className="border-1 bg-slate-300 border-slate-300 m-1 p-1"
+                      name="endDate"
+                      type="date"
+                      value={endDate}
+                      onChange={onEndDateChange}
+                    />
+                    <input
+                      className="border-1 bg-slate-300 border-slate-300 m-1 p-1"
+                      name="endTime"
+                      type="time"
+                      value={endTime}
+                      onChange={onEndDateChange}
+                    />
+                  </div>
+                </>
 
-            }
-            <button type="submit">완료</button>
+              }
+              <div className="absolute right-2 bottom-2">
+                <button className="m-1 p-1 border-2 border-slate-300 bg-slate-300" type="submit">완료</button>
+                <button className="m-1 p-1 border-2 border-slate-300 bg-slate-300" onClick={closeModal}>닫기</button>
+              </div>
+            </form>
+          </div>
+        </section>
 
-          </form>
-          <button onClick={closeModal}>닫기</button>
+      </Modal>
 
-        </Modal>
-      </div>
-      <div >
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            center: 'dayGridMonth,timeGridWeek,timeGridDay new',
-          }}
-          dateClick={toggleModal} // 그리드 클릭 이벤트
-          customButtons={{
-            new: {
-              text: 'new',
-              click: newButtonClick, // 커스텀 버튼 (New)
-            },
-          }}
-          eventClick={eventClick} // 이벤트 클릭 이벤트
-          events={events} // 캘린더에 표시되는 이벤트
-          eventColor={eventColor} // 이벤트 색상
-        />
-      </div>
 
-    </>
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        headerToolbar={{
+          center: 'dayGridMonth,timeGridWeek,timeGridDay new',
+        }}
+        dateClick={toggleModal} // 그리드 클릭 이벤트
+        customButtons={{
+          new: {
+            text: 'new',
+            click: newButtonClick, // 커스텀 버튼 (New)
+          },
+        }}
+        eventClick={eventClick} // 이벤트 클릭 이벤트
+        events={events} // 캘린더에 표시되는 이벤트
+        eventColor={eventColor} // 이벤트 색상
+      />
+    </div >
 
 
   );
