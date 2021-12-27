@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import LogOut from "./LogOut";
 import Cookie from "../static/NavLogo2.svg"
-import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navigator = () => {
-  const [setToggle, setSetToggle] = useState(false);
+  const el = useRef();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const clickToggle = (prev) => setSetToggle((prev) => !prev);
+  const handleCloseSection = (event) => {
+    if (el.current && !el.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  }
+
+  const onToggle = (prev) => setIsOpen((prev) => !prev);
+
+  useEffect(() => {
+    window.addEventListener('mousedown', handleCloseSection);
+    return () => {
+      window.removeEventListener('mousedown', handleCloseSection);
+    };
+  }, [])
+
 
   return (
     <nav className="bg-gray-200 relative">
@@ -17,10 +32,10 @@ const Navigator = () => {
           <img src={Cookie} />
         </li>
         <li className="inline-block float-right pt-2 pr-14">
-          <button onClick={clickToggle}>
+          <button ref={el} onClick={onToggle}>
             <FontAwesomeIcon icon={faCog} />
           </button>
-          {setToggle
+          {isOpen
             &&
             <div className="relative left-3 ">
               <Link to="/setting">설정</Link>
