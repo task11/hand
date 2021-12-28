@@ -26,22 +26,25 @@ const Navigator = () => {
 
 
   return (
-    <nav className="bg-gray-200 relative">
+    <nav className="bg-gray-200">
       <ul className="w-full h-auto text-lg font-bold p-7">
         <li className="inline-block pt-1">
           <img src={Cookie} />
         </li>
         <li className="inline-block float-right pt-2 pr-14">
-          <button ref={el} onClick={onToggle}>
+          <button onClick={onToggle}>
             <FontAwesomeIcon icon={faCog} />
           </button>
           {isOpen
             &&
-            <div className="relative left-3 ">
-              <Link to="/setting">설정</Link>
-              <br />
-              <LogOut />
-            </div>
+            <article ref={el} className="absolute rounded-lg font-normal border-gray-800 border-2 bg-slate-300">
+              <div className="border-b-2 border-gray-800 text-center">
+                <Link to="/setting">설정</Link>
+              </div>
+              <div>
+                <LogOut />
+              </div>
+            </article>
           }
         </li>
         <li className="inline-block float-right pt-2 pr-14 ">
