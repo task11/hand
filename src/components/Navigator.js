@@ -26,12 +26,18 @@ const Navigator = () => {
 
 
   return (
-    <nav className="bg-gray-200">
-      <ul className="w-full h-auto text-lg font-bold p-7">
-        <li className="inline-block pt-1">
-          <img src={Cookie} />
+    <nav className="flex w-full bg-gray-200">
+      <article className="flex-none p-7">
+        <img src={Cookie} />
+      </article>
+      <ul className="flex ml-auto text-lg font-bold">
+        <li className="p-7">
+          <Link to="/">HOME</Link>
         </li>
-        <li className="inline-block float-right pt-2 pr-14">
+        <li className="p-7">
+          <Link to="/profile">프로필</Link>
+        </li>
+        <li className="p-7">
           <button onClick={onToggle}>
             <FontAwesomeIcon icon={faCog} />
           </button>
@@ -46,12 +52,6 @@ const Navigator = () => {
               </div>
             </article>
           }
-        </li>
-        <li className="inline-block float-right pt-2 pr-14 ">
-          <Link to="/profile">프로필</Link>
-        </li>
-        <li className="inline-block float-right pt-2 pr-14 ">
-          <Link to="/">HOME</Link>
         </li>
       </ul>
 
