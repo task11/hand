@@ -6,11 +6,11 @@ import React from "react";
 const Home = ({ userObj }) => {
   console.log(userObj);
   return (
-    <div className="flex w-full">
-      <div className="flex m-5 w-3/5 h-auto">
+    <div className="flex justify-center items-center w-auto h-max">
+      <div className="flex m-5 w-auto h-auto">
         <Calendar userObj={userObj} />
       </div>
-      <div className="flex m-5 w-2/5 h-4/5">
+      <div className="flex m-5 w-auto h-auto">
         <ToDoList userObj={userObj} />
         <MemoList userObj={userObj} />
       </div>

@@ -473,8 +473,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-auto {
   height: auto;
 }
-.h-4\/5 {
-  height: 80%;
+.h-max {
+  height: max-content;
 }
 .h-44 {
   height: 11rem;
@@ -490,12 +490,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-5\/6 {
   width: 83.333333%;
-}
-.w-3\/5 {
-  width: 60%;
-}
-.w-2\/5 {
-  width: 40%;
 }
 .w-auto {
   width: auto;

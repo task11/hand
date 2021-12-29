@@ -26,7 +26,7 @@ const Navigator = () => {
 
 
   return (
-    <nav className="flex w-full bg-gray-200">
+    <nav className="flex w-full h-auto bg-gray-200">
       <article className="flex-none p-7">
         <img src={Cookie} />
       </article>
