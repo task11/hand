@@ -6,7 +6,7 @@ import React from "react";
 const Home = ({ userObj }) => {
   console.log(userObj);
   return (
-    <div className="flex justify-center items-center w-auto h-max">
+    <div className="flex justify-center items-center w-full h-auto">
       <div className="flex m-5 w-auto h-auto">
         <Calendar userObj={userObj} />
       </div>
