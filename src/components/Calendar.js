@@ -117,18 +117,15 @@ const Calendar = ({ userObj }) => {
   }, [userObj.uid]);
 
   return (
-    <div>
+    <>
       <Modal
         style={{
           overlay: {
             position: 'fixed',
             zIndex: 1050,
-            top: '40%',
-            left: '15%',
-            right: '80%',
-            bottom: '30%',
+            margin: 'auto',
             width: '450px',
-            height: 'auto',
+            height: '450px',
             overflowY: 'auto',
             overflowX: 'hidden',
             borderRadius: '16px',
@@ -136,12 +133,9 @@ const Calendar = ({ userObj }) => {
           },
           content: {
             position: 'fixed',
-            top: '40%',
-            left: '15%',
-            right: '80%',
-            bottom: '30%',
+            margin: 'auto',
             width: '450px',
-            height: 'auto',
+            height: '450px',
             border: '1px solid #ccc',
             background: 'rgba(255, 255, 255)',
             WebkitOverflowScrolling: 'touch',
@@ -248,25 +242,26 @@ const Calendar = ({ userObj }) => {
 
       </Modal>
 
-
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          center: 'dayGridMonth,timeGridWeek,timeGridDay new',
-        }}
-        dateClick={toggleModal} // 그리드 클릭 이벤트
-        customButtons={{
-          new: {
-            text: 'new',
-            click: newButtonClick, // 커스텀 버튼 (New)
-          },
-        }}
-        eventClick={eventClick} // 이벤트 클릭 이벤트
-        events={events} // 캘린더에 표시되는 이벤트
-        eventColor={eventColor} // 이벤트 색상
-      />
-    </div >
+      <div className="flex">
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            center: 'dayGridMonth,timeGridWeek,timeGridDay new',
+          }}
+          dateClick={toggleModal} // 그리드 클릭 이벤트
+          customButtons={{
+            new: {
+              text: 'new',
+              click: newButtonClick, // 커스텀 버튼 (New)
+            },
+          }}
+          eventClick={eventClick} // 이벤트 클릭 이벤트
+          events={events} // 캘린더에 표시되는 이벤트
+          eventColor={eventColor} // 이벤트 색상
+        />
+      </div>
+    </ >
 
 
   );
