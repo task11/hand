@@ -518,6 +518,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .content-end {
   align-content: flex-end;
 }
+.items-start {
+  align-items: flex-start;
+}
 .items-center {
   align-items: center;
 }

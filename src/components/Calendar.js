@@ -242,25 +242,23 @@ const Calendar = ({ userObj }) => {
 
       </Modal>
 
-      <div className="flex">
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
-          headerToolbar={{
-            center: 'dayGridMonth,timeGridWeek,timeGridDay new',
-          }}
-          dateClick={toggleModal} // 그리드 클릭 이벤트
-          customButtons={{
-            new: {
-              text: 'new',
-              click: newButtonClick, // 커스텀 버튼 (New)
-            },
-          }}
-          eventClick={eventClick} // 이벤트 클릭 이벤트
-          events={events} // 캘린더에 표시되는 이벤트
-          eventColor={eventColor} // 이벤트 색상
-        />
-      </div>
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        headerToolbar={{
+          center: 'dayGridMonth,timeGridWeek,timeGridDay new',
+        }}
+        dateClick={toggleModal} // 그리드 클릭 이벤트
+        customButtons={{
+          new: {
+            text: 'new',
+            click: newButtonClick, // 커스텀 버튼 (New)
+          },
+        }}
+        eventClick={eventClick} // 이벤트 클릭 이벤트
+        events={events} // 캘린더에 표시되는 이벤트
+        eventColor={eventColor} // 이벤트 색상
+      />
     </ >
 
 
