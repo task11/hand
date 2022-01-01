@@ -47,7 +47,7 @@ const Navigator = () => {
               <div className="border-b-2 border-gray-800 text-center">
                 <Link to="/setting">설정</Link>
               </div>
-              <div>
+              <div >
                 <LogOut />
               </div>
             </article>

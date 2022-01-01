@@ -48,7 +48,7 @@ const Memo = ({ memoObj }) => {
 
 
   return (
-    <div className="relative m-3.5 inline-block border-2 border-yellow-200 rounded-xl w-32 h-32 bg-yellow-200">
+    <div className="relative m-3.5 inline-block border-2 border-yellow-200 rounded-xl w-36 h-36 bg-yellow-200">
       {isEdit ?
         <form onSubmit={onEditSubmit}>
           <input

@@ -28,14 +28,12 @@ function App() {
       {init ?
         <>
           <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
-
         </>
         :
         <div className="flex flex-col justify-center items-center h-screen">
           <img src={Cookie}></img>
         </div>
       }
-
     </div >
   );
 }
