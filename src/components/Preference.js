@@ -2,7 +2,10 @@ import React from "react";
 
 const Preference = () => {
   return (
-    <span>설정</span>
+    <div className="">
+      <span>Setting</span>
+
+    </div>
   );
 }
 
