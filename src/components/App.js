@@ -5,7 +5,7 @@ import React, {
 import AppRouter from "./Router";
 import { authService } from "fBase";
 import { onAuthStateChanged } from "firebase/auth";
-import Cookie from "../static/loading.svg"
+import Cookie from "../static/loading.svg";
 
 function App() {
   const [init, setInit] = useState(false);

@@ -13,27 +13,27 @@ import {
 const OAuthForm = () => {
   const onSocialClick = async (event) => {
     const { target: { name } } = event;
-    let provider
+    let provider;
     if (name === 'google') {
       provider = new GoogleAuthProvider();
     } else if (name === 'facebook') {
       provider = new FacebookAuthProvider();
     }
     await signInWithPopup(authService, provider);
-  }
+  };
 
   return (
     <ul>
       <li className="inline-block m-1">
         <button onClick={onSocialClick} name="google">
-          <FontAwesomeIcon icon={faGoogle} />
+          <FontAwesomeIcon icon={faGoogle} /> Sign in google
         </button>
       </li>
-      <li className="inline-block m-1">
+      {/* <li className="inline-block m-1">
         <button onClick={onSocialClick} name="facebook">
           <FontAwesomeIcon icon={faFacebook} />
         </button>
-      </li>
+      </li> */}
     </ul>
   );
 };

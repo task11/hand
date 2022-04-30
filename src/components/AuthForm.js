@@ -15,6 +15,7 @@ const AuthForm = () => {
   const [newAccount, setNewAccount] = useState(false);
   const [error, setError] = useState("");
   const [passwdValid, setPasswdVaild] = useState(false);
+
   const toggleAccount = (prev) => {
     setNewAccount((prev) => !prev);
     setPasswdVaild(false);
@@ -29,7 +30,7 @@ const AuthForm = () => {
     } else if (name === "text") {
       setUsername(value);
     }
-  }
+  };
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -47,7 +48,7 @@ const AuthForm = () => {
           });
         }).catch((error) => {
           setError(error.message);
-        })
+        });
       } else {
         setError("패스워드의 길이가 짧습니다.");
         setPassword("");
@@ -63,13 +64,13 @@ const AuthForm = () => {
       });
     }
 
-  }
+  };
 
   return (
     <div className="text-center">
       <form onSubmit={onSubmit} >
         {newAccount &&
-          <input className="m-1 w-72 h-12 bg-gray-200 shadow-md"
+          <input className="m-1 w-72 h-12 p-6 bg-gray-200 shadow-md"
             name="text"
             type="text"
             value={username}
@@ -78,20 +79,20 @@ const AuthForm = () => {
           />
         }
         <br />
-        <input className="m-1 w-72 h-12 bg-gray-200 shadow-md "
+        <input className="m-1 w-72 h-12 p-6 bg-gray-200 shadow-md "
           name="email"
           type="email"
           onChange={onChange}
           value={email}
-          placeholder="이메일(example@gmail.com)"
+          placeholder={newAccount ? "이메일(example@gmail.com)" : "Enter your email.."}
         />
         <br />
-        <input className={`${passwdValid ? 'animate-pulse bg-red-400 m-1 w-72 h-12 shadow-md' : 'bg-gray-200 m-1 w-72 h-12 shadow-md'}`}
+        <input className={`${passwdValid ? 'animate-pulse bg-red-400 m-1 w-72 h-12 p-6 shadow-md' : 'bg-gray-200 m-1 w-72 h-12 p-6 shadow-md'}`}
           name="password"
           type="password"
           onChange={onChange}
           value={password}
-          placeholder="영문, 숫자, 특문 중 2개 조합 10자 이상"
+          placeholder={newAccount ? "영문, 숫자, 특문 중 2개 조합 10자 이상" : "Enter your password.."}
         />
         <br />
         <br />
