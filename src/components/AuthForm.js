@@ -69,43 +69,46 @@ const AuthForm = () => {
   return (
     <div className="text-center">
       <form onSubmit={onSubmit} >
-        {newAccount &&
-          <input className="m-1 w-72 h-12 p-6 bg-gray-200 shadow-md"
-            name="text"
-            type="text"
-            value={username}
-            onChange={onChange}
-            placeholder="이름(2자 이상)"
-          />
-        }
-        <br />
-        <input className="m-1 w-72 h-12 p-6 bg-gray-200 shadow-md "
+        <input className=" w-72 h-12 p-6 rounded-t-xl bg-gray-200 border-gray-700 border-b border-solid shadow-md "
           name="email"
           type="email"
           onChange={onChange}
           value={email}
-          placeholder={newAccount ? "이메일(example@gmail.com)" : "Enter your email.."}
+          placeholder={newAccount ? "이메일(example@gmail.com)" : "이메일을 입력하세요."}
         />
+
+        {newAccount &&
+          <>
+            <br />
+            <input className=" w-72 h-12 p-6 border-gray-700 border-b border-solid bg-gray-200 shadow-md"
+              name="text"
+              type="text"
+              value={username}
+              onChange={onChange}
+              placeholder="이름(2자 이상)"
+            />
+          </>
+        }
         <br />
-        <input className={`${passwdValid ? 'animate-pulse bg-red-400 m-1 w-72 h-12 p-6 shadow-md' : 'bg-gray-200 m-1 w-72 h-12 p-6 shadow-md'}`}
+        <input className={`${passwdValid ? 'animate-pulse rounded-b-xl bg-red-400 w-72 h-12 p-6 shadow-md' : 'bg-gray-200 rounded-b-xl w-72 h-12 p-6 shadow-md'}`}
           name="password"
           type="password"
           onChange={onChange}
           value={password}
-          placeholder={newAccount ? "영문, 숫자, 특문 중 2개 조합 10자 이상" : "Enter your password.."}
+          placeholder={newAccount ? "영문, 숫자, 특문 중 2개 조합 10자 이상" : "비밀번호를 입력하세요."}
         />
         <br />
         <br />
-        <input className="m-1 w-32 h-6 cursor-pointer rounded-3xl bg-gray-400 font-bold"
+        <input className="m-1 bg-purple-400 w-72 rounded-xl h-8 text-white shadow-md cursor-pointer font-bold "
           type="submit"
-          value={newAccount ? "Sign In" : "Log In"}
+          value={newAccount ? "완료" : "로그인"}
         />
         <br />
       </form>
       <button
-        className="m-1 w-32 h-6 rounded-3xl bg-gray-400 font-bold"
+        className="m-1 bg-purple-400 w-72 rounded-xl text-white h-8 shadow-md font-bold"
         onClick={toggleAccount}>
-        {newAccount ? "Log In" : "Join"}
+        {newAccount ? "로그인" : "회원가입"}
       </button>
       <br />
       {error && <span>{error}</span>}
