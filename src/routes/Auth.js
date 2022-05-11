@@ -1,12 +1,95 @@
 import AuthForm from "components/AuthForm";
 import OAuthForm from "components/OAuthForm";
 import { React, useState } from "react";
-import Cookie from "../static/MainLogo2.svg";
 import Modal from "react-modal";
-import BgImg from "../static/hand-background-mid.jpeg";
-import BgImgP from "../static/hand-background-purple-mid.jpeg";
+import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
+const Title = styled.p`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+  font-size: 1.8em;
+  line-height: 1.2em;
+  color: ${(props) => props.theme.accentColor};
+  p{
+    text-align: center;
+  }
+`;
+
+const Button = styled.button`
+  margin-top: 2em;
+  width: 12em;
+  height: 2em;
+  border: solid 1px ${(props) => props.theme.btnColor};
+  border-radius: 1em;
+  cursor: pointer;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.btnColor};
+  transition: color 1s linear;
+  
+  &:hover{
+    background-color: ${(props) => props.theme.hoverBtnColor};
+  }
+`;
+
+const Span = styled.span`
+  width: 100%;
+  text-align: center;
+  line-height: 1.5em;
+  color: ${(props) => props.theme.accentColor};
+  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+  transform: translateY(-50px);
+  opacity: 0;
+  animation-name: titleAnimation;
+  animation-timing-function:ease;
+  animation-duration: 5s;
+  animation-delay: 0.6s;
+  animation-iteration-count: infinite;
+  &:first-child{
+    animation-delay: 0.7s;
+  }
+  &:last-child{
+    animation-delay: 0.5s;
+  }
+
+  @keyframes titleAnimation {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+    }
+    20% {
+        transform: translateY(0);
+        opacity: 1;
+        -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+    }
+    80% {
+        transform: translateY(0);
+        opacity: 1;
+        -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+    }
+    100% {
+        transform: translateY(50px);
+        opacity: 0;
+        -webkit-clip-path: polygon(100% 0, 100% -0%, 0 100%, 0 100%);
+        clip-path: polygon(100% 0, 100% -0%, 0 100%, 0 100%);
+    }
+}
+`;
 
 const Auth = () => {
   Modal.setAppElement("#root");
@@ -16,16 +99,16 @@ const Auth = () => {
     SetStateModal((prev) => !prev);
   };
 
-
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(${BgImgP})` }}>
-      {!stateModal && <div className="text-2xl text-white flex flex-col justify-center items-center">
-        <p className="text-center">
-          한손으로 당신의 하루를 시작하세요.<br />
-          탭 하나로 일상을 기록하세요.
-        </p>
-        <button className="mt-12 w-60 h-7 bg-purple-500 border-solid border-1 rounded-xl cursor-pointer transition-colors hover:bg-purple-400" onClick={toggleModal} >have a nice day.</button>
-      </div>
+    <Container>
+      {!stateModal &&
+        <>
+          <Title>
+            <Span>한손으로 당신의 하루를 시작하세요.</Span>
+            <Span>탭 하나로 일상을 기록하세요.</Span>
+          </Title>
+          <Button onClick={toggleModal} >Have A Nice Day</Button>
+        </>
       }
       <Modal
         style={{
@@ -59,8 +142,8 @@ const Auth = () => {
         <AuthForm />
         <OAuthForm />
       </Modal>
-    </div >
+    </Container >
   );
 };
 
-export default Auth;
+export default Auth;;;;;;
