@@ -5,7 +5,9 @@ import React, {
 import AppRouter from "./Router";
 import { authService } from "fBase";
 import { onAuthStateChanged } from "firebase/auth";
-import Cookie from "../static/loading.svg";
+import Loader from "../static/loading.svg";
+import GlobalStyle from "globalstyle";
+
 
 function App() {
   const [init, setInit] = useState(false);
@@ -24,26 +26,19 @@ function App() {
 
 
   return (
-    <div>
+    <>
+      <GlobalStyle />
       {init ?
         <>
           <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
         </>
         :
         <div className="flex flex-col justify-center items-center h-screen">
-          <img src={Cookie}></img>
+          <img src={Loader}></img>
         </div>
       }
-    </div >
+    </ >
   );
 }
-
-// style={{
-//   width: "100%",
-//   height: "0px", /* footer의 높이 */
-//   position: "absolute",
-//   bottom: "0",
-//   left: "0"
-// }}
 
 export default App;
