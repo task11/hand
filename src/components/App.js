@@ -2,9 +2,9 @@ import React, {
   useEffect,
   useState
 } from "react";
-import AppRouter from "./Router";
 import { authService } from "fBase";
 import { onAuthStateChanged } from "firebase/auth";
+import AppRouter from "./Router";
 import Loader from "./Loader";
 import GlobalStyle from "globalstyle";
 
@@ -24,14 +24,11 @@ function App() {
     });
   }, []);
 
-
   return (
     <>
       <GlobalStyle />
       {init ?
-        <>
-          <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
-        </>
+        <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
         :
         <Loader />
       }
