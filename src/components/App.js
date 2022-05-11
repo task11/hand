@@ -5,7 +5,7 @@ import React, {
 import AppRouter from "./Router";
 import { authService } from "fBase";
 import { onAuthStateChanged } from "firebase/auth";
-import Loader from "../static/loading.svg";
+import Loader from "./Loader";
 import GlobalStyle from "globalstyle";
 
 
@@ -33,9 +33,7 @@ function App() {
           <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
         </>
         :
-        <div className="flex flex-col justify-center items-center h-screen">
-          <img src={Loader}></img>
-        </div>
+        <Loader />
       }
     </ >
   );
