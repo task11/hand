@@ -10,11 +10,83 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const InputEmail = styled.input`
-/* w-72 h-12 p-6 rounded-t-xl bg-gray-200 border-gray-700 border-b border-solid shadow-md */
-width: 18rem;
+  margin-top: 1rem;
+  width: 14rem;
+  height: 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid ${props => props.theme.bgColor};
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  outline: none;
+`;
+
+const InputUsername = styled.input`
+  border-bottom-width: 1px;
+  width: 14rem;
+  height: 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid ${props => props.theme.bgColor};
+  outline: none;
+`;
+
+const InputPasswd = styled.input`
+  width: 14rem;
+  height: 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  outline: none;
+`;
+
+const Login = styled.input`
+  margin-top: 0.8rem;
+  width: 12rem;
+  height: 1.5rem;
+  border: solid 1px ${(props) => props.theme.btnColor};
+  border-radius: 1rem;
+  cursor: pointer;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.btnColor};
+  transition: all 0.5s linear;
+  
+  &:hover{
+    color: ${(props) => props.theme.hoverTextColor};
+    background-color: ${(props) => props.theme.hoverBtnColor};
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.2) inset;
+  }
+`;
+
+const Button = styled.button`
+  margin-top: 0.8rem;
+  margin-bottom: 1rem;
+  width: 12rem;
+  height: 1.5rem;
+  border: solid 1px ${(props) => props.theme.btnColor};
+  border-radius: 1rem;
+  cursor: pointer;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.btnColor};
+  transition: all 0.5s linear;
+  
+  &:hover{
+    color: ${(props) => props.theme.hoverTextColor};
+    background-color: ${(props) => props.theme.hoverBtnColor};
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.2) inset;
+  }
 `;
 
 
@@ -81,7 +153,7 @@ const AuthForm = () => {
   return (
     <Container>
       <form onSubmit={onSubmit} >
-        <input className=" w-72 h-12 p-6 rounded-t-xl bg-gray-200 border-gray-700 border-b border-solid shadow-md "
+        <InputEmail
           name="email"
           type="email"
           onChange={onChange}
@@ -91,8 +163,7 @@ const AuthForm = () => {
 
         {newAccount &&
           <>
-            <br />
-            <input className=" w-72 h-12 p-6 border-gray-700 border-b border-solid bg-gray-200 shadow-md"
+            <InputUsername
               name="text"
               type="text"
               value={username}
@@ -101,31 +172,23 @@ const AuthForm = () => {
             />
           </>
         }
-        <br />
-        <input className={`${passwdValid ? 'animate-pulse rounded-b-xl bg-red-400 w-72 h-12 p-6 shadow-md' : 'bg-gray-200 rounded-b-xl w-72 h-12 p-6 shadow-md'}`}
+        <InputPasswd
           name="password"
           type="password"
           onChange={onChange}
           value={password}
           placeholder={newAccount ? "영문, 숫자, 특문 중 2개 조합 10자 이상" : "비밀번호를 입력하세요."}
         />
-        <br />
-        <br />
-        <input className="m-1 bg-purple-400 w-72 rounded-xl h-8 text-white shadow-md cursor-pointer font-bold "
+        <Login
           type="submit"
           value={newAccount ? "완료" : "로그인"}
         />
-        <br />
       </form>
-      <button
-        className="m-1 bg-purple-400 w-72 rounded-xl text-white h-8 shadow-md font-bold"
+      <Button
         onClick={toggleAccount}>
         {newAccount ? "로그인" : "회원가입"}
-      </button>
-      <br />
+      </Button>
       {error && <span>{error}</span>}
-      <br />
-
     </Container>
   );
 };

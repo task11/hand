@@ -38,7 +38,7 @@ const ModalBlock = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: 1.8rem;
     background-color: white;
     width: 30rem;
     @media (max-width: 1120px) {
@@ -47,7 +47,7 @@ const ModalBlock = styled.div`
     @media (max-width: 20rem) {
         width: 40%;
     }
-    min-height: 20rem;
+    min-height: 10rem;
     animation: modal-show 1s;
     @keyframes modal-show {
         from {

@@ -19,7 +19,6 @@ const Title = styled.p`
   align-items: center;
   font-weight: 300;
   font-size: 1.8rem;
-  line-height: 1.2rem;
   color: ${(props) => props.theme.accentColor};
   p{
     text-align: center;
@@ -47,7 +46,7 @@ const Button = styled.button`
 const Span = styled.span`
   width: 100%;
   text-align: center;
-  line-height: 1.5rem;
+  line-height: 2.5rem;
   color: ${(props) => props.theme.accentColor};
   -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
   clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
