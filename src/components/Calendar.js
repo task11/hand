@@ -28,7 +28,7 @@ const Calendar = ({ userObj }) => {
   const toggleModal = (arg) => {
     setIsOpen((prev) => !prev);
     setStartDay(arg.dateStr);
-  }
+  };
 
   let str = formatDate(new Date(), {
     month: 'long',
@@ -37,12 +37,12 @@ const Calendar = ({ userObj }) => {
   });
 
   const eventClick = (e) => {
-    console.log(e.event.id)
-  }
+    console.log(e.event.id);
+  };
 
   const newButtonClick = () => {
-    console.log('new event')
-  }
+    console.log('new event');
+  };
 
   const onAddCalendar = async (event) => {
     event.preventDefault();
@@ -67,14 +67,14 @@ const Calendar = ({ userObj }) => {
     setStartTime("");
     setEndDate("");
     setEndTime("");
-  }
+  };
 
   const onStartTimeChange = (event) => {
     const { target: { name, value } } = event;
     if (name === "startTime") {
       setStartTime(value);
     }
-  }
+  };
 
   const onEndDateChange = (event) => {
     const { target: { name, value } } = event;
@@ -83,18 +83,18 @@ const Calendar = ({ userObj }) => {
     } else if (name === "endTime") {
       setEndTime(value);
     }
-  }
+  };
 
   const onSetTitle = (event) => {
     const { target: { value } } = event;
 
     setTitle(value);
 
-  }
+  };
 
   const toggleBtn = (arg) => {
     setEverydayBtn((prev) => !prev);
-  }
+  };
 
   useEffect(() => {
     const q = query(collection(dbService, "schedules"), orderBy("start", "desc"), where("creatorId", "==", userObj.uid)); //userObj.uid가 왜 안될까 ? 
@@ -105,7 +105,7 @@ const Calendar = ({ userObj }) => {
         return {
           id: doc.id,
           ...doc.data()
-        }
+        };
       });
       setEvents(eventArray);
     });
@@ -264,6 +264,6 @@ const Calendar = ({ userObj }) => {
 
   );
 
-}
+};
 
 export default Calendar;

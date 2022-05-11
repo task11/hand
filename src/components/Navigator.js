@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import LogOut from "./LogOut";
-import Cookie from "../static/NavLogo2.svg"
+import Cookie from "../static/NavLogo2.svg";
 import { faCog, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -13,7 +13,7 @@ const Navigator = () => {
     if (el.current && !el.current.contains(event.target)) {
       setIsOpen(false);
     }
-  }
+  };
 
   const onToggle = (prev) => setIsOpen((prev) => !prev);
 
@@ -22,11 +22,11 @@ const Navigator = () => {
     return () => {
       window.removeEventListener('mousedown', handleCloseSection);
     };
-  }, [])
+  }, []);
 
 
   return (
-    <nav className="flex w-full h-20 bg-gray-200">
+    <nav className="flex w-full h-20 bg-purple-500">
       <article className="flex-none p-7">
         <img src={Cookie} />
       </article>

@@ -7,10 +7,10 @@ const Home = ({ userObj }) => {
   console.log(userObj);
   return (
     <div className="flex justify-center items-center w-full h-screen">
-      <div className="flex m-5 w-auto h-auto ">
+      <div className="flex m-5 w-1/2 h-full ">
         <Calendar userObj={userObj} />
       </div>
-      <div className="flex m-5 w-auto h-auto">
+      <div className="flex m-5 w-1/2 h-full">
         <ToDoList userObj={userObj} />
         <MemoList userObj={userObj} />
       </div>

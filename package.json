@@ -21,15 +21,14 @@
     "react-modal": "^3.14.4",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.3.5",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:css": "postcss src/style/tailwind.css -o src/style/global.css",
-    "build:watch": "postcss src/style/tailwind.css -o src/style/global.css --watch"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -50,9 +49,6 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.5",
-    "postcss-cli": "^9.1.0",
-    "tailwindcss": "^3.0.7"
+    "autoprefixer": "^10.4.0"
   }
 }
