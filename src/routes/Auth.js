@@ -1,8 +1,8 @@
 import AuthForm from "components/AuthForm";
 import OAuthForm from "components/OAuthForm";
 import { React, useState } from "react";
-import Modal from "react-modal";
 import styled from "styled-components";
+import ModalFrame from "components/ModalFrame";
 
 const Container = styled.div`
   display: flex;
@@ -28,17 +28,19 @@ const Title = styled.p`
 
 const Button = styled.button`
   margin-top: 2em;
-  width: 12em;
+  width: 10em;
   height: 2em;
   border: solid 1px ${(props) => props.theme.btnColor};
   border-radius: 1em;
   cursor: pointer;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.btnColor};
-  transition: color 1s linear;
+  transition: all 0.5s linear;
   
   &:hover{
+    color: ${(props) => props.theme.hoverTextColor};
     background-color: ${(props) => props.theme.hoverBtnColor};
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.2) inset;
   }
 `;
 
@@ -92,10 +94,10 @@ const Span = styled.span`
 `;
 
 const Auth = () => {
-  Modal.setAppElement("#root");
+  // Modal.setAppElement("#root");
   const [stateModal, SetStateModal] = useState(false);
 
-  const toggleModal = () => {
+  const toggleModal = (e) => {
     SetStateModal((prev) => !prev);
   };
 
@@ -110,40 +112,12 @@ const Auth = () => {
           <Button onClick={toggleModal} >Have A Nice Day</Button>
         </>
       }
-      <Modal
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 1050,
-          overlay: {
-            position: 'fixed',
-            backgroundColor: 'rgba(52, 52, 52, 0.8)',
-            overflowY: 'auto',
-            overflowX: 'hidden',
-          },
-          content: {
-            position: 'absolute',
-            width: '500px',
-            height: '350px',
-            top: '50%',
-            left: '50%',
-            overflowY: 'auto',
-            overflowX: 'hidden',
-            transform: 'translate(-50%, -50%)',
-            outline: 'none',
-            backgroundColor: 'transparent',
-            border: 'none'
-          }
-        }}
-        isOpen={stateModal}
-        onRequestClose={() => SetStateModal(false)}
-        contentLabel="Login dialog">
+      <ModalFrame handleModal={toggleModal} state={stateModal}>
         <AuthForm />
         <OAuthForm />
-      </Modal>
+      </ModalFrame>
     </Container >
   );
 };
 
-export default Auth;;;;;;
+export default Auth;
