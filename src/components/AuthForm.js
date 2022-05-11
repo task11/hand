@@ -5,6 +5,19 @@ import {
   signInWithEmailAndPassword,
   updateProfile
 } from "@firebase/auth";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputEmail = styled.input`
+/* w-72 h-12 p-6 rounded-t-xl bg-gray-200 border-gray-700 border-b border-solid shadow-md */
+width: 18rem;
+`;
+
+
 
 
 const AuthForm = () => {
@@ -63,11 +76,10 @@ const AuthForm = () => {
         setError(error.message);
       });
     }
-
   };
 
   return (
-    <div className="text-center">
+    <Container>
       <form onSubmit={onSubmit} >
         <input className=" w-72 h-12 p-6 rounded-t-xl bg-gray-200 border-gray-700 border-b border-solid shadow-md "
           name="email"
@@ -114,7 +126,7 @@ const AuthForm = () => {
       {error && <span>{error}</span>}
       <br />
 
-    </div>
+    </Container>
   );
 };
 

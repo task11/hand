@@ -18,8 +18,8 @@ const Title = styled.p`
   justify-content: center;
   align-items: center;
   font-weight: 300;
-  font-size: 1.8em;
-  line-height: 1.2em;
+  font-size: 1.8rem;
+  line-height: 1.2rem;
   color: ${(props) => props.theme.accentColor};
   p{
     text-align: center;
@@ -27,11 +27,11 @@ const Title = styled.p`
 `;
 
 const Button = styled.button`
-  margin-top: 2em;
-  width: 10em;
-  height: 2em;
+  margin-top: 2rem;
+  width: 10rem;
+  height: 2rem;
   border: solid 1px ${(props) => props.theme.btnColor};
-  border-radius: 1em;
+  border-radius: 1rem;
   cursor: pointer;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.btnColor};
@@ -47,7 +47,7 @@ const Button = styled.button`
 const Span = styled.span`
   width: 100%;
   text-align: center;
-  line-height: 1.5em;
+  line-height: 1.5rem;
   color: ${(props) => props.theme.accentColor};
   -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
   clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
