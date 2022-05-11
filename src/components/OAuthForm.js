@@ -1,7 +1,6 @@
 import React from "react";
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { authService } from "fBase";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTwitter,
@@ -9,6 +8,19 @@ import {
   faGithub,
   faFacebook
 } from "@fortawesome/free-brands-svg-icons";
+import styled from "styled-components";
+
+const Li = styled.li`
+  display: flex;
+  flex-direction: row;
+  margin: 0.25rem;
+`;
+
+const Button = styled.button`
+ border: none;
+ background-color: white;
+ cursor: pointer;
+`;
 
 const OAuthForm = () => {
   const onSocialClick = async (event) => {
@@ -24,11 +36,11 @@ const OAuthForm = () => {
 
   return (
     <ul>
-      <li className="inline-block m-1">
-        <button onClick={onSocialClick} name="google">
-          <FontAwesomeIcon icon={faGoogle} /> Sign in google
-        </button>
-      </li>
+      <Li>
+        <Button onClick={onSocialClick} name="google">
+          <FontAwesomeIcon icon={faGoogle} />
+        </Button>
+      </Li>
       {/* <li className="inline-block m-1">
         <button onClick={onSocialClick} name="facebook">
           <FontAwesomeIcon icon={faFacebook} />
