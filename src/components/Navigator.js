@@ -36,30 +36,32 @@ const Strong = styled.strong`
 const Nav = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 40%;
+  width: 50%;
 `;
 
 const Ul = styled.ul`
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 100%;
   justify-content: space-around;
+  align-items: center;
 `;
 
 const Li = styled.li`
-  padding: 1.7rem;
-  width: 30%;
-  &:first-child{
-    width: 35%;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  width: 100%;
 `;
 
 const Profile = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 const UserThumnail = styled.img.attrs({
@@ -69,6 +71,10 @@ const UserThumnail = styled.img.attrs({
   width: auto;
   height: 2.2rem;
   border-radius: 20px;
+`;
+
+const UserName = styled.span`
+  font-size: 1.4rem;
 `;
 
 
@@ -109,17 +115,13 @@ const Navigator = () => {
       <Nav>
         <Ul>
           <Li>
-            <Profile>
-              <UserThumnail ></UserThumnail>
-              <span>username</span>
-            </Profile>
+            <Link to="/profile">
+              <Profile>
+                <UserThumnail />
+                <UserName>Welcome! Username</UserName>
+              </Profile>
+            </Link>
           </Li>
-          <Li>
-            <Link to="/profile">Edit profile</Link>
-          </Li>
-          {/* <Button onClick={onToggle}>
-              <FontAwesomeIcon icon={faCog} />
-            </Button> */}
           <Li>
             <Link to="/setting">Preference</Link>
           </Li>
