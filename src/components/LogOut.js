@@ -1,6 +1,15 @@
 import { authService } from "fBase";
 import React from "react";
 import { useNavigate } from "react-router";
+import styled from "styled-components";
+
+const Button = styled.a`
+  border: none;
+  background-color: white;
+  font-family: inherit;
+  font-size: inherit;
+`;
+
 
 const LogOut = () => {
   const navigate = useNavigate();
@@ -13,8 +22,8 @@ const LogOut = () => {
   };
 
   return (
-    <button onClick={onLogOutClick}>로그아웃</button>
+    <Button onClick={onLogOutClick}>Log out</Button>
   );
 };
 
-export default LogOut;
+export default LogOut;;
