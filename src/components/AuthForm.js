@@ -71,7 +71,7 @@ const Login = styled.input`
 `;
 
 const Button = styled.button`
-  margin-top: 0.8rem;
+  margin-top: 0.4rem;
   margin-bottom: 1rem;
   width: 12rem;
   height: 1.5rem;
