@@ -11,13 +11,11 @@ const Header = styled.header`
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
+  position: fixed;
   top: 0;
   font-size: 1.7rem;
   height: 5rem;
   width: 100%;
-  
-  /* background-color: ${props => props.theme.bgColor}; */
-  /* box-shadow: inset 4px 0 0 0 rgb(0 0 0 / 6%); */
 `;
 
 const Logo = styled.h1`
@@ -69,7 +67,8 @@ const UserThumnail = styled.img.attrs({
   alt: "user-thumnail"
 })`
   width: auto;
-  height: 2.2rem;
+  height: 2.6rem;
+  margin-right: 1rem;
   border-radius: 20px;
 `;
 
@@ -97,16 +96,15 @@ const Navigator = () => {
     };
   }, []);
 
-
   return (
     <Header>
       <Logo>
         <h1>
           <Link to="/">
             <span>
-              <Strong>H</Strong>ave
+              <Strong>H</Strong>ave&nbsp;
               <Strong>A</Strong>&nbsp;
-              <Strong>N</Strong>ice
+              <Strong>N</Strong>ice&nbsp;
               <Strong>D</Strong>ay
             </span>
           </Link>
