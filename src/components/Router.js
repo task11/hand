@@ -13,7 +13,7 @@ import Footer from "./Footer";
 const AppRouter = ({ userObj, isLoggedIn }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigator />}
+      {isLoggedIn && <Navigator userObj={userObj} />}
       <Routes>{isLoggedIn ?
         <>
           <Route

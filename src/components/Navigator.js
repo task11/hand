@@ -63,7 +63,6 @@ const Profile = styled.div`
 `;
 
 const UserThumnail = styled.img.attrs({
-  src: `${defaultThumnail}`,
   alt: "user-thumnail"
 })`
   width: auto;
@@ -77,7 +76,7 @@ const UserName = styled.span`
 `;
 
 
-const Navigator = () => {
+const Navigator = ({ userObj }) => {
   const el = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -115,8 +114,8 @@ const Navigator = () => {
           <Li>
             <Link to="/profile">
               <Profile>
-                <UserThumnail />
-                <UserName>Welcome! Username</UserName>
+                <UserThumnail src={userObj.photoURL} />
+                <UserName>Welcome! {userObj.displayName}</UserName>
               </Profile>
             </Link>
           </Li>
