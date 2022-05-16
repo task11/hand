@@ -2,7 +2,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService } from "fBase";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background-color: white;
+  border: none;
+  cursor: pointer;
+`;
+
+const TodosWrapper = styled.li`
+  display: flex;
+  flex-direction: row;
+`;
+
+
+const EditInput = styled.input`
+  border: none;
+  outline: none;
+  font-size: inherit;
+  color: gray;
+  border-bottom: 1px solid ${props => props.theme.bgColor};
+`;
+
+
 
 const ToDo = ({ toDoObj }) => {
   const [editToggle, setEditToggle] = useState(false);
@@ -18,7 +41,7 @@ const ToDo = ({ toDoObj }) => {
       }
     } = event;
     setNewTask(value);
-  }
+  };
 
   const onEditClick = (prev) => {
     setEditToggle((prev) => !prev);
@@ -44,7 +67,7 @@ const ToDo = ({ toDoObj }) => {
     await updateDoc(toDoRef, {
       task: newTask
     });
-  }
+  };
 
   const onCheck = (prev) => {
     setIsChecked((prev) => !prev);
@@ -58,49 +81,49 @@ const ToDo = ({ toDoObj }) => {
 
 
   return (
-    <>
-      <div className="relative">
-        <input type="checkbox"
-          value={isChecked}
-          onChange={onCheck}
-          checked={toDoObj.done}
-        />
-        {isEdit ?
-          (
-            <form onSubmit={onEditSubmit}>
-              <span>
-                <input
-                  value={newTask}
-                  onChange={onEditChange}
-                />
-              </span>
-              <button name="edit" type="submit">수정!</button>
-              <button name="cancle" type="button" onClick={onCancle} >취소</button>
-            </form>
-          ) :
+    <TodosWrapper>
+      <input type="checkbox"
+        value={isChecked}
+        onChange={onCheck}
+        checked={toDoObj.done}
+      />
+      {isEdit ?
+        (
+          <form onSubmit={onEditSubmit}>
+            <EditInput
+              value={newTask}
+              onChange={onEditChange}
+            />
+            <Button name="edit" type="submit">완료</Button>
+            <Button name="cancle" type="button" onClick={onCancle} >취소</Button>
+          </form>
+        ) :
+        <>
           <span>{toDoObj.task}</span>
-        }
-        <button
-          className
-          onClick={onEditClick}
-        >
-          <FontAwesomeIcon icon={faEdit} />
-        </button>
-        {
-          editToggle &&
-          (
-            <div>
-              <button
-                onClick={onEditToDo}
-              >수정</button>
-              <button
-                onClick={onDeleteToDo}
-              >삭제</button>
-            </div>
-          )
-        }
-      </div >
-    </>
+          <Button
+            className
+            onClick={onEditClick}
+          >
+            <FontAwesomeIcon icon={faPen} />
+          </Button>
+        </>
+      }
+
+
+      {
+        editToggle &&
+        (
+          <div>
+            <Button
+              onClick={onEditToDo}
+            >수정</Button>
+            <Button
+              onClick={onDeleteToDo}
+            >삭제</Button>
+          </div>
+        )
+      }
+    </TodosWrapper>
   );
 };
 

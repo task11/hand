@@ -12,7 +12,58 @@ import { onAuthStateChanged } from "@firebase/auth";
 import ToDoEdit from "./ToDo";
 import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
 
+const TodoContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+`;
+
+const TodoTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  form{
+    width: 100%
+  }
+`;
+
+const Title = styled.span`
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`;
+
+const TodoInput = styled.input`
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  border-bottom: 1px solid ${props => props.theme.bgColor};
+  width: 80%;
+  margin-bottom: 1.5rem;
+`;
+
+const Todos = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  font-size: 1.2rem;
+  width: 100%;
+  ul li{
+    margin-bottom: 1rem;
+  }
+`;
+
+const Button = styled.button`
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+`;
 
 const ToDoList = ({ userObj }) => {
 
@@ -28,7 +79,7 @@ const ToDoList = ({ userObj }) => {
       }
     } = event;
     setToDo(value);
-  }
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -43,7 +94,7 @@ const ToDoList = ({ userObj }) => {
       setError(e);
     }
     setToDo("");
-  }
+  };
 
 
 
@@ -55,7 +106,7 @@ const ToDoList = ({ userObj }) => {
         return {
           id: doc.id,
           ...doc.data()
-        }
+        };
       });
       setToDos(toDoArray);
     });
@@ -65,28 +116,27 @@ const ToDoList = ({ userObj }) => {
         unsubscribe();
       }
     });
-  }, [userObj.uid])
+  }, [userObj.uid]);
 
   return (
-    <div className="flex flex-col m-5 p-9 w-5/6 h-1/2 border-2 rounded-2xl">
-      <div className="text-center">
-        <span className="font-bold text-2xl" >To-Do-List</span>
-        <br />
+    <TodoContent>
+      <TodoTitle>
+        <Title>To-Do-List</Title>
         <form onSubmit={onSubmit}>
-          <input
+          <TodoInput
             name="text"
             type="text"
             value={toDo}
             onChange={onChange}
             placeholder="할 일을 입력하세요.."
           />
-          <button type="submit" name="add">
-            <FontAwesomeIcon icon={faPlusSquare} />
-          </button>
+          <Button type="submit" name="add">
+            <FontAwesomeIcon icon={faPlusSquare} size="2x" />
+          </Button>
           {error && <span>{error}</span>}
         </form>
-      </div>
-      <div>
+      </TodoTitle>
+      <Todos>
         <ul>
           {toDos.map((toDo) => {
             return (
@@ -97,9 +147,9 @@ const ToDoList = ({ userObj }) => {
             );
           })}
         </ul>
-      </div>
-    </div>
+      </Todos>
+    </TodoContent>
   );
-}
+};
 
 export default ToDoList;

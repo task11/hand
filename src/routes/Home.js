@@ -16,22 +16,26 @@ const Container = styled.div`
 const Wrapper = styled.div`
   min-width: 20%;
   min-height: 40%;
+  max-width: 30%;
+  max-height: 70%;
   width: 30%;
-  height: 80%;
+  height: 70%;
   resize: both;
   overflow: auto;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 const CalendarWrapper = styled(Wrapper)`
-  background-color: red;
+  
 `;
 
 const ToDoWrapper = styled(Wrapper)`
-  background-color: blue;
+  
 `;
 
 const MemoWrapper = styled(Wrapper)`
-  background-color: black;
+  
 `;
 
 const Home = ({ userObj }) => {
