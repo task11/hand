@@ -8,6 +8,7 @@ const Button = styled.a`
   background-color: white;
   font-family: inherit;
   font-size: inherit;
+  cursor: pointer;
 `;
 
 

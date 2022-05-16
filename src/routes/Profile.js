@@ -4,6 +4,143 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { deleteObject, getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storageService } from "fBase";
+import styled from "styled-components";
+
+const ProfileSection = styled.section`
+  display: flex;
+  width: auto;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+`;
+
+const SectionName = styled.span`
+  font-weight: bold;
+  font-size: 3rem;
+  padding: 3rem;
+`;
+
+const ProfileForm = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ProfileImgForm = styled.div`
+  margin-right: 1.5rem;
+`;
+
+const ProfileImg = styled.img`
+  border-radius: 9999px;
+  width: 11rem;
+  height: 11rem;
+`;
+
+const ProfileButton = styled.div`
+  text-align: center;
+  margin-top: 1rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity));
+  margin: 0.3rem;
+  &:hover{
+    color: ${(props) => props.theme.accentColor};
+  }
+`;
+
+const AddLabel = styled(Label).attrs({
+  htmlFor: "input-file"
+})`
+cursor: pointer;
+
+
+`;
+
+const DelLabel = styled(Label).attrs({
+  htmlFor: "delete-file"
+})`
+cursor: pointer;
+`;
+
+const NameLabel = styled(Label).attrs({
+  htmlFor: "input-text"
+})``;
+
+const AddImg = styled.input.attrs({
+  id: "input-file",
+  type: "file",
+  name: "changeImg",
+  accept: "image/*",
+})`
+  display: none;
+`;
+
+const DelImg = styled.input.attrs({
+  id: "delete-file",
+  type: "button",
+  name: "deleteImg",
+})`
+  display: none;
+`;
+
+const ProfileNameForm = styled.div`
+  margin-top: 3rem;
+`;
+
+const ProfileName = styled.input.attrs({
+  id: "input-text",
+  type: "text",
+  name: "changeName",
+})`
+  display: block;
+  border-bottom-width: 1px;
+  width: 14rem;
+  height: 1.5rem;
+  padding: 1rem;
+  border: none;
+  outline: none;
+`;
+
+const ProfileNameInfo = styled.span`
+  font-size: 0.7rem;
+`;
+
+const Hr = styled.div`
+margin-top: 1.5rem;
+margin-bottom: 0.5rem;
+`;
+
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  font-size: 1.5rem;
+  line-height: 2rem;
+`;
+
+const Button = styled.button`
+  margin-right: 1rem;
+  width: 3rem;
+  height: 1.5rem;
+  border: solid 1px ${(props) => props.theme.btnColor};
+  border-radius: 1rem;
+  cursor: pointer;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.btnColor};
+  transition: all 0.5s linear;
+  
+  &:hover{
+    color: ${(props) => props.theme.hoverTextColor};
+    background-color: ${(props) => props.theme.hoverBtnColor};
+    box-shadow:200px 0 0 0 rgba(0,0,0,0.2) inset;
+  }
+`;
 
 const Profile = ({ userObj }) => {
   const defaultProfilePhotoUrl = "https://firebasestorage.googleapis.com/v0/b/hand-f5ddb.appspot.com/o/basicProfile.jpeg?alt=media&token=7e5fa233-5f6f-43a0-894a-65388faaf895";
@@ -18,10 +155,10 @@ const Profile = ({ userObj }) => {
     reader.onloadend = (endEvent) => {
       const { currentTarget: { result } } = endEvent;
       setNewPhoto(result);
-    }
+    };
     reader.readAsDataURL(imgFile);
 
-  }
+  };
 
   const deleteProfileImg = async () => {
     const deletePhotoRef = ref(storageService, userObj.photoURL);
@@ -30,8 +167,8 @@ const Profile = ({ userObj }) => {
       await deleteObject(deletePhotoRef);
       await updateProfile(userObj, {
         photoURL: defaultProfilePhotoUrl,
-      })
-      setNewPhoto(userObj.photoURL)
+      });
+      setNewPhoto(userObj.photoURL);
       navigate('/');
     }
 
@@ -40,12 +177,12 @@ const Profile = ({ userObj }) => {
     // }).catch(function (error) {
     //   // Uh-oh, an error occurred!
     // });
-  }
+  };
 
   const onChange = (event) => {
     const { target: { value } } = event;
     setNewDisplayName(value);
-  }
+  };
 
   const onSubmitProfileUpdate = async (event) => {
     event.preventDefault();
@@ -66,81 +203,53 @@ const Profile = ({ userObj }) => {
       await updateProfile(userObj, {
         displayName: newDisplayName,
         photoURL: newPhotoUrl,
-      })
+      });
     }
     navigate('/');
-  }
+  };
 
   const onCancel = () => {
     navigate('/');
-  }
-
-
+  };
 
   return (
-    <section className="flex w-auto flex-col text-xl items-center h-screen overflow-hidden">
-      <span className="font-bold text-5xl p-10">프로필 수정</span>
+    <ProfileSection>
+      <SectionName>프로필 수정</SectionName>
       <form onSubmit={onSubmitProfileUpdate}>
-        <div className="flex">
-          <div className="mr-6">
-            <div>
-              <img
-                className="bg-['newPhoto'] rounded-full w-44 h-44"
-                src={newPhoto}
-                alt={userObj.displayName}
-              />
-            </div>
-            <div className="text-center mt-3 ">
-              <label className="block cursor-pointer border-2 border-slate-300 p-1" htmlFor="input-file">
-                이미지 추가
-              </label>
-              <input
-                className="hidden "
-                id="input-file"
-                type="file"
-                name="changeImg"
-                accept="image/*"
-                onChange={changeProfileImg}
-
-              />
-              <label className="block cursor-pointer border-2 border-slate-300 mt-1 p-1" htmlFor="delete-file">
-                이미지 삭제
-              </label>
-              <input
-                className="hidden"
-                id="delete-file"
-                type="button"
-                name="deleteImg"
-                onClick={deleteProfileImg}
-              />
-            </div>
-          </div>
-          <div className="mt-8">
-            <label className="block" htmlFor="input-text">이름</label>
-            <input
-              className="block border-4 bg-slate-300 border-slate-300 mt-2"
-              id="input-text"
-              type="text"
-              name="changeName"
+        <ProfileForm>
+          <ProfileImgForm>
+            <ProfileImg
+              src={newPhoto}
+              alt={userObj.displayName}
+            />
+            <ProfileButton>
+              <AddLabel>이미지 변경</AddLabel>
+              <AddImg onChange={changeProfileImg} />
+              <DelLabel>이미지 삭제</DelLabel>
+              <DelImg onClick={deleteProfileImg} />
+            </ProfileButton>
+          </ProfileImgForm>
+          <ProfileNameForm>
+            <NameLabel>이름</NameLabel>
+            <ProfileName
               value={newDisplayName}
               onChange={onChange}
-            ></input>
-            <span className="text-slate-300 text-xs">* 이름은 최소 2자, 최대 20자 까지 입력이 가능해요</span>
-          </div>
-        </div>
-        <div className="mt-6 mb-2"><hr /></div>
-        <div className="text-2xl">
-          <button
-            className="border-2 bg-slate-300 border-slate-300 m-1 p-1"
+            />
+            <ProfileNameInfo>* 이름은 최소 2자, 최대 20자 까지 입력이 가능해요</ProfileNameInfo>
+          </ProfileNameForm>
+        </ProfileForm>
+        <Hr><hr /></Hr>
+        <ButtonWrap>
+          <Button
             type="submit">
             완료
-          </button>
-          <button
-            className="border-2 bg-slate-300 border-slate-300 m-1 p-1"
-            type="reset" onClick={onCancel}>취소</button>
-        </div>
+          </Button>
+          <Button
+            type="reset"
+            onClick={onCancel}>취소</Button>
+        </ButtonWrap>
       </form>
-    </section >
+    </ProfileSection >
   );
 };
 
