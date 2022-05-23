@@ -3,6 +3,46 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
+
+const Button = styled.button`
+  background-color: white;
+  border: none;
+  cursor: pointer;
+`;
+
+const MemosWrapper = styled.li`
+/* relative m-3.5 inline-block border-2 border-yellow-200 rounded-xl w-36 h-36 bg-yellow-200 */
+  display: flex;
+  flex-flow: row wrap;
+  margin: 2rem;
+  border: 1px solid yellow;
+  border-radius: 10px;
+  background-color: yellow;
+  position: relative;
+  width: 30%;
+  height: 200px;
+  
+  form{
+    padding:1rem;
+  }
+`;
+
+const EditInput = styled.input`
+  border: none;
+  outline: none;
+  font-size: inherit;
+  color: gray;
+  border-bottom: 1px solid ${props => props.theme.bgColor};
+`;
+
+const EditButton = styled(Button)`
+  background-color: yellow;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+`;
+
 
 const Memo = ({ memoObj }) => {
   const [editToggle, setEditToggle] = useState(false);
@@ -14,7 +54,7 @@ const Memo = ({ memoObj }) => {
   const onSetClik = (prev) => setEditToggle((prev) => !prev);
 
   const onEditClick = (prev) => {
-    setIsEdit((prev) => !prev)
+    setIsEdit((prev) => !prev);
     onSetClik();
   };
 
@@ -24,7 +64,7 @@ const Memo = ({ memoObj }) => {
       setEditToggle(false);
       await deleteDoc(memoRef);
     }
-  }
+  };
 
 
   const onEditChange = (event) => {
@@ -34,7 +74,7 @@ const Memo = ({ memoObj }) => {
       }
     } = event;
     setNewMemo(value);
-  }
+  };
 
   const onEditSubmit = async (event) => {
     event.preventDefault();
@@ -42,54 +82,48 @@ const Memo = ({ memoObj }) => {
     await updateDoc(memoRef, {
       text: newMemo
     });
-  }
+  };
 
   const onCancle = (prev) => setIsEdit((prev) => !prev);
 
 
   return (
-    <div className="relative m-3.5 inline-block border-2 border-yellow-200 rounded-xl w-36 h-36 bg-yellow-200">
+    <MemosWrapper>
       {isEdit ?
         <form onSubmit={onEditSubmit}>
-          <input
-            className="bg-transparent"
+          <EditInput
             value={newMemo}
             onChange={onEditChange}
           />
-          <button name="edit" type="submit">수정</button>
-          <button name="cancle" type="button" onClick={onCancle} >취소</button>
+          <Button name="edit" type="submit">수정</Button>
+          <Button name="cancle" type="button" onClick={onCancle} >취소</Button>
         </form>
         :
-        <div className="m-1.5 p-1.5">
+        <>
           <span>{memoObj.text}</span>
 
-          <button
-            className=" absolute right-0 bottom-0"
+          <EditButton
             onClick={onSetClik}
           >
             <FontAwesomeIcon icon={faEdit} />
-          </button>
-        </div>
+          </EditButton>
+        </>
       }
       {
         editToggle &&
-        <div className="absolute right-0 -bottom-10">
-          <input
-            type="button"
-            value="수정"
+        <div>
+          <Button
             onClick={onEditClick}
-          />
+          >수정</Button>
           <br />
-          <input
-            type="button"
-            value="삭제"
+          <Button
             onClick={onDeleteClick}
-          />
+          >삭제</Button>
         </div>
       }
-    </div >
+    </MemosWrapper >
   );
-}
+};
 
 
 export default Memo;

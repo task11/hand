@@ -101,7 +101,6 @@ const ToDo = ({ toDoObj }) => {
         <>
           <span>{toDoObj.task}</span>
           <Button
-            className
             onClick={onEditClick}
           >
             <FontAwesomeIcon icon={faPen} />
