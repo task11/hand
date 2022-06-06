@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/have-a-nice-day-react-frontend/static/js/main.c593d9ff.chunk.js",
-    "main.js.map": "/have-a-nice-day-react-frontend/static/js/main.c593d9ff.chunk.js.map",
-    "runtime-main.js": "/have-a-nice-day-react-frontend/static/js/runtime-main.8b0e8d1a.js",
-    "runtime-main.js.map": "/have-a-nice-day-react-frontend/static/js/runtime-main.8b0e8d1a.js.map",
-    "static/js/2.0115a064.chunk.js": "/have-a-nice-day-react-frontend/static/js/2.0115a064.chunk.js",
-    "static/js/2.0115a064.chunk.js.map": "/have-a-nice-day-react-frontend/static/js/2.0115a064.chunk.js.map",
-    "index.html": "/have-a-nice-day-react-frontend/index.html",
-    "static/js/2.0115a064.chunk.js.LICENSE.txt": "/have-a-nice-day-react-frontend/static/js/2.0115a064.chunk.js.LICENSE.txt",
-    "static/media/basicProfile.6e9fb66b.jpeg": "/have-a-nice-day-react-frontend/static/media/basicProfile.6e9fb66b.jpeg",
-    "static/media/loading.f3c44297.svg": "/have-a-nice-day-react-frontend/static/media/loading.f3c44297.svg"
+    "main.js": "/have-a-nice-day-react-frontend/index.html/static/js/main.c593d9ff.chunk.js",
+    "main.js.map": "/have-a-nice-day-react-frontend/index.html/static/js/main.c593d9ff.chunk.js.map",
+    "runtime-main.js": "/have-a-nice-day-react-frontend/index.html/static/js/runtime-main.51caf321.js",
+    "runtime-main.js.map": "/have-a-nice-day-react-frontend/index.html/static/js/runtime-main.51caf321.js.map",
+    "static/js/2.2d81b33e.chunk.js": "/have-a-nice-day-react-frontend/index.html/static/js/2.2d81b33e.chunk.js",
+    "static/js/2.2d81b33e.chunk.js.map": "/have-a-nice-day-react-frontend/index.html/static/js/2.2d81b33e.chunk.js.map",
+    "index.html": "/have-a-nice-day-react-frontend/index.html/index.html",
+    "static/js/2.2d81b33e.chunk.js.LICENSE.txt": "/have-a-nice-day-react-frontend/index.html/static/js/2.2d81b33e.chunk.js.LICENSE.txt",
+    "static/media/basicProfile.6e9fb66b.jpeg": "/have-a-nice-day-react-frontend/index.html/static/media/basicProfile.6e9fb66b.jpeg",
+    "static/media/loading.f3c44297.svg": "/have-a-nice-day-react-frontend/index.html/static/media/loading.f3c44297.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.8b0e8d1a.js",
-    "static/js/2.0115a064.chunk.js",
+    "static/js/runtime-main.51caf321.js",
+    "static/js/2.2d81b33e.chunk.js",
     "static/js/main.c593d9ff.chunk.js"
   ]
 }
